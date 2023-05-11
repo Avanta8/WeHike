@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
+import 'user_model.dart';
+import 'api_service.dart';
 //Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
 void main() {
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'WeHike',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Brijraj Demo Page'),
+      home: const MyHomePage(title: 'Brijrajs doxxing machine'),
     );
   }
 }
@@ -56,6 +58,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _weather = "Placeholder";
   Position _position = new Position(longitude: 10, latitude: 0, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0);
 
   void _incrementCounter() {
@@ -68,6 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+
+  void _getData() async {
+    Weather_data _model = (await ApiService().getUsers())!;
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {_weather = _model.current.condition.text;})); 
+  }
+
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -181,6 +190,13 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_position',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const Text(
+              'Your weather is',
+            ),
+            Text(
+              '$_weather',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ],
         ),
       ),
@@ -192,6 +208,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),FloatingActionButton(
         onPressed: _getLocation,
         tooltip: 'Get Location',
+        child: const Icon(Icons.add),
+      ),FloatingActionButton(
+        onPressed: _getData,
+        tooltip: 'Get Weather',
         child: const Icon(Icons.add),
       ),]),
        // This trailing comma makes auto-formatting nicer for build methods.
