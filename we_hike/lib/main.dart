@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
+import 'package:we_hike/constants.dart';
 import 'user_model.dart';
 import 'api_service.dart';
 //Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Brijrajs doxxing machine'),
+      home: const MyHomePage(title: 'Brijraj\'s doxxing machine'),
     );
   }
 }
@@ -57,10 +58,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String _location = "";
   int _counter = 0;
   String _weather = "Placeholder";
   Position _position = new Position(longitude: 10, latitude: 0, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0);
-
+  final TextEditingController _searchController = TextEditingController();
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -72,9 +74,22 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _getData() async {
-    Weather_data _model = (await ApiService().getUsers())!;
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {_weather = _model.current.condition.text;})); 
+  void _getData(String userQuery) async {
+    Weather_data _model = (await ApiService().getWeather(userQuery))!;
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
+      _weather = _model.current.condition.text;
+      _location  = _model.location.name;
+      })); 
+  }
+  void _setSearchQuery(){
+    String userQuery = "&q="+ _searchController.text.toString().toLowerCase() + "&aqi=no";
+    print(userQuery);
+    _getData(userQuery);
+    print("being run");
+    setState(() {
+      _counter++;
+    });
+    
   }
 
   Future<Position> _determinePosition() async {
@@ -133,6 +148,9 @@ class _MyHomePageState extends State<MyHomePage> {
       _position = position;
     });
   }
+  void _getDataWrapper(){
+    _getData("");
+  }
   void _getLocationBuggy() async {
     print("Buggy is running");
     //Position position  = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -176,6 +194,37 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          // Add padding around the search bar
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          // Use a Material design search bar
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              // Add a clear button to the search bar
+              suffixIcon: IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () => _searchController.clear(),
+              ),
+              // Add a search icon or button to the search bar
+              prefixIcon: IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  _setSearchQuery;
+                  // Perform the search here
+                },
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+            ),
+            ),
+            ),
+        
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -197,12 +246,19 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_weather',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const Text(
+              'Your location is',
+            ),
+            Text(
+              '$_location',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ],
         ),
       ),
       floatingActionButton:Column(
     mainAxisAlignment: MainAxisAlignment.end,children: [ FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _setSearchQuery,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),FloatingActionButton(
@@ -210,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Get Location',
         child: const Icon(Icons.add),
       ),FloatingActionButton(
-        onPressed: _getData,
+        onPressed: _getDataWrapper,
         tooltip: 'Get Weather',
         child: const Icon(Icons.add),
       ),]),
