@@ -21,7 +21,7 @@ class ApiService {
         print('Diagnostic_2');
         return _model;
       }
-    //}// catch (e) {
+    //} catch (e) {
       //print(response.toString());
       //print("issue");
       //log(e.toString());
