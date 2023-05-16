@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.5
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +19,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/magnifying-glass-solid.svg
+    - assets/hills.jpg
+    - assets/Comfortaa Regular.ttf
+
+  fonts:
+     - family: Comfortaa
+       fonts:
+         - asset: assets/Comfortaa Regular.ttf
