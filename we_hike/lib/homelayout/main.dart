@@ -4,6 +4,8 @@ import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
 
+import '../widgets/hourlyScroller.dart';
+
 void main() {
   runApp(HomePage());
 }
@@ -38,7 +40,7 @@ class Layout extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/hills.jpg'),
-            fit: BoxFit.cover
+            fit: BoxFit.fitHeight,
             )
         ),
         child: SingleChildScrollView(
@@ -119,7 +121,7 @@ class Layout extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
                         height: 200,
-                        child: Expanded(child: Container(color: Colors.red),)
+                        child: Expanded(child: HourlyScroller(),)
                       ),
                     ),
       
