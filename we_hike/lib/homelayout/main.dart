@@ -3,8 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
-
-import '../widgets/hourlyScroller.dart';
+import 'package:we_hike/widgets/hourlyScroller.dart';
 
 void main() {
   runApp(HomePage());
@@ -205,24 +204,8 @@ class Layout extends StatelessWidget {
       
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.grey,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 8,
-                                child: Center(child: WhiteText(text: DateFormat("EEEEE dd/mm/yyyy").format(DateTime.now()).toString())),
-                                ),
-                              const Expanded(
-                                flex: 1,
-                                child: Center(child: Text(">>"))
-                                ),
-                          ]),
+                          child: Center(child: WhiteText(text: DateFormat("EEEEE dd/mm/yyyy").format(DateTime.now()).toString())),
                         ),
-                      ),
-                    ),
                 ],
               )
             ),
