@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:location/location.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
-// importing icons
-import 'package:cupertino_icons/cupertino_icons.dart';
-
-void main() {
-  runApp(HomePage());
-}
 
 
 final Widget svg = SvgPicture.asset(
@@ -21,27 +16,71 @@ final Widget svg = SvgPicture.asset(
   alignment: Alignment.centerLeft,
 );
 
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Layoutbasic',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-      home: Layout(),
-    );
-  }
-}
-
 class Layout extends StatefulWidget {
+  String location;
+  Layout({
+    super.key,
+    required this.location,
+  });
+
   @override
   State<Layout> createState() => _LayoutState();
 }
 
 class _LayoutState extends State<Layout> {
   // state stuff goes here
+  static bool today = true;
+
+  Widget _bottomBar() {
+    if(today == true) {
+        return Row(
+          children: [
+            const Expanded(
+              flex: 1,
+              child: FittedBox()
+              ),
+            Expanded(
+              flex: 4,
+              child: Center(child: WhiteText(text: DateFormat("EEEEE dd/mm/yyyy").format(DateTime.now()).toString()))
+              ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(child: const Icon(Icons.arrow_circle_right_outlined, color: Colors.white,),
+              onTap: () {
+                setState(() {
+                  _LayoutState.today = false;
+                });
+              },
+              ),
+              )
+          ],
+        );
+    }
+    else {
+        return Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: GestureDetector(child: const Icon(Icons.arrow_circle_left_outlined, color: Colors.white,),
+              onTap: () {
+                setState(() {
+                  _LayoutState.today = true;
+                });
+              },
+              ),
+              ),
+            Expanded(
+              flex: 4,
+              child: Center(child: WhiteText(text: DateFormat("EEEEE dd/mm/yyyy").format(DateTime.now()).toString()))
+              ),
+            const Expanded(
+              flex: 1,
+              child: FittedBox()
+              ),
+          ],
+        );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,19 +112,18 @@ class _LayoutState extends State<Layout> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 20, 15, 5),
                               child: Column(
-                                children: const [
-                                  Align(
+                                children: [
+                                  const Align(
                                     alignment: Alignment.centerRight,
                                     child: ClockWidget()
                                     ),
-                                  Align(
+                                  const Align(
                                     alignment: Alignment.centerRight,
                                     child: WhiteText(text: "Current Location"),
                                     ),
                                   Align(
                                     alignment: Alignment.centerRight,
-                                    child: WhiteText(text: 
-                                      "Dartmoor",
+                                    child: WhiteText(text: widget.location,
                                     )
                                     ),
                                 ],
@@ -203,11 +241,9 @@ class _LayoutState extends State<Layout> {
                         ),
                       ),
                     ),
-      
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                          child: Center(child: WhiteText(text: DateFormat("EEEEE dd/mm/yyyy").format(DateTime.now()).toString())),
-                        ),
+
+                    Padding(padding: const EdgeInsets.all(8),
+                    child: _bottomBar(),)
                 ],
               )
             ),
