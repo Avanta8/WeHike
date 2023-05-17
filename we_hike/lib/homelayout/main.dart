@@ -5,6 +5,9 @@ import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
+import 'package:we_hike/widgets/current_weather_icon.dart';
+// importing icons
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 void main() {
   runApp(HomePage());
@@ -113,15 +116,7 @@ class _LayoutState extends State<Layout> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              color: Colors.blue,
-                              child: const Center(child: Text("# weather icon #")),
-                            ),
-                          ),
-                        ),
+                        const CurrentWeatherIcon(),
                       ],
                     ),
 
