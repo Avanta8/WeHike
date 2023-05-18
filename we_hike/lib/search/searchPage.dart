@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_hike/homelayout/main.dart';
 
 class search_page extends StatelessWidget {
   const search_page({super.key});
@@ -13,9 +14,11 @@ class search_page extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: GestureDetector(
-                  child: Icon(Icons.arrow_back_ios, color: Colors.blue,),
+                  child: const Icon(Icons.arrow_back_ios, color: Colors.green,),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => Layout(key: key)));
                   },
                 ),
               ),      

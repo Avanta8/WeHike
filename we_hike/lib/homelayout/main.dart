@@ -8,6 +8,7 @@ import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
 
+
 class WeatherApp extends StatelessWidget {
   const WeatherApp({super.key});
   @override
@@ -42,6 +43,16 @@ class Layout extends StatefulWidget {
 class _LayoutState extends State<Layout> {
   // state stuff goes here
   static bool today = true;
+
+
+  Widget _hourlyScroller() {
+    if(today = true) {
+      return Text("Today");
+    }
+    else {
+      return Text("Tomorrow");
+    }
+  }
 
   // bar at the bottom of the screen that displays the current data and 
   // allows the user to switch between data about the weather today and tomorrow
@@ -125,7 +136,7 @@ class _LayoutState extends State<Layout> {
                                         // move to search screen
                                         Navigator.push(
                                           context, 
-                                          MaterialPageRoute(builder: (_) => const search_page()));
+                                          MaterialPageRoute(builder: (context) => const search_page()));
                                       },
                             ),
                           ),
@@ -187,6 +198,7 @@ class _LayoutState extends State<Layout> {
                         child: Expanded(child: HourlyScroller(),)
                       ),
                     ),
+
                     const SunTimes(sunriseTime: "06:07", sunsetTime: "21:42"),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
