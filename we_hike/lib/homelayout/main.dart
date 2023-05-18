@@ -187,7 +187,7 @@ class _LayoutState extends State<Layout> {
                             ),
                           ),
                         ),
-                        const CurrentWeatherIcon(),
+                        const CurrentWeatherIcon(iconCode: 113,),
                       ],
                     ),
 
