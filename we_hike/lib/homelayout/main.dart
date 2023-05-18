@@ -34,7 +34,7 @@ final Widget svg = SvgPicture.asset(
 );
 
 class Layout extends StatefulWidget {
-  final Future<futureModel>? weatherForecast;
+  final Future<futureModel?>? weatherForecast;
   const Layout({
     super.key,
     this.weatherForecast,
@@ -69,6 +69,15 @@ class _LayoutState extends State<Layout> {
     }
     else {
       return HourlyScroller(weatherModel: currentWeatherModel.forecast.forecastday[1]);
+    }
+  }
+
+  Widget _getBottomHald(futureModel currentWeatherModel) {
+    if(today = true) {
+      return bottomHalf(weatherModel: currentWeatherModel.forecast.forecastday[0]);
+    }
+    else {
+      return bottomHalf(weatherModel: currentWeatherModel.forecast.forecastday[1]);
     }
   }
 
@@ -236,16 +245,7 @@ class _LayoutState extends State<Layout> {
                           child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.3,
-                              child: bottomHalf(
-                                  sunrisetime: '05:32',
-                                  sunsettime: '20:55',
-                                  cloudcoverage: [10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-                                  windspeed: [10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-                                  rainfall: [10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-                                  hournow: 10,
-                                  warnings: ['Warning 1', 'Warning 2'],
-                                  textstyle: TextStyle(fontSize: 20, color: Colors.white)
-                              )
+                              child: _getBottomHalf(weatherModel: currentWeatherModel),
                           )
                       ),
 
