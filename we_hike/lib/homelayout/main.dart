@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:we_hike/my_api/api_calls.dart';
+import 'package:we_hike/my_api/future_model.dart';
 import 'package:we_hike/searchpage/main.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
@@ -19,7 +21,7 @@ class WeatherApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-      home: Layout(),
+      home: const Layout(),
     );
   }
 }
@@ -32,18 +34,29 @@ final Widget svg = SvgPicture.asset(
 );
 
 class Layout extends StatefulWidget {
+  final Future<futureModel>? weatherForecast;
   const Layout({
     super.key,
+    this.weatherForecast,
   });
 
   @override
   State<Layout> createState() => _LayoutState();
 
-  Future<String> _getLocationFromMemory() async {
-    final prefs = await SharedPreferences.getInstance();
-    String storedLocation = prefs.getString('location') ?? "London";
-    return storedLocation;
+  Future<futureModel?>? _getWeatherModel() {
+    if(weatherForecast is Future<futureModel?>) {
+      return weatherForecast;
+    }
+    else {
+      return getWeatherForecast("Edinburgh");
+    }
   }
+
+  // Future<String> _getLocationFromMemory() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   String storedLocation = prefs.getString('location') ?? "London";
+  //   return storedLocation;
+  // }
 }
 
 class _LayoutState extends State<Layout> {
@@ -115,9 +128,9 @@ class _LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: widget._getLocationFromMemory(),
+      future: widget._getWeatherModel(),
       builder: (context, snapshot) {
-        String location = snapshot.data!;
+        futureModel currentWeatherModel = snapshot.data!;
         return Scaffold(
           body: Container(
             width: MediaQuery.of(context).size.width,
@@ -165,7 +178,7 @@ class _LayoutState extends State<Layout> {
                                         ),
                                       Align(
                                         alignment: Alignment.centerRight,
-                                        child: WhiteText(text: location,
+                                        child: WhiteText(text: currentWeatherModel.location.name,
                                         )
                                         ),
                                     ],
