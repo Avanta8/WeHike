@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class WeatherApp extends StatelessWidget {
@@ -38,12 +39,17 @@ class Layout extends StatefulWidget {
 
   @override
   State<Layout> createState() => _LayoutState();
+
+  Future<String> _getLocationFromMemory() async {
+    final prefs = await SharedPreferences.getInstance();
+    String storedLocation = prefs.getString('location') ?? "London";
+    return storedLocation;
+  }
 }
 
 class _LayoutState extends State<Layout> {
   // state stuff goes here
   static bool today = true;
-
 
   Widget _hourlyScroller() {
     if(today = true) {
@@ -145,7 +151,7 @@ class _LayoutState extends State<Layout> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 20, 15, 5),
                               child: Column(
-                                children: const [
+                                children: [
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: ClockWidget()
