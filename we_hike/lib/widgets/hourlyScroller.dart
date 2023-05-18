@@ -3,12 +3,16 @@ import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
 import 'package:we_hike/widgets/white_text.dart';
 
+import '../my_api/future_model.dart';
+
 class HourlyScroller extends StatelessWidget{
-  const HourlyScroller({super.key});
+  const HourlyScroller({super.key, required this.weatherModel});
+  final Forecastday weatherModel;
 
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
+    List<Hour> hourlyList = weatherModel.hour;
     return ListView(
         scrollDirection: Axis.horizontal,
         children: [
@@ -38,9 +42,9 @@ class HourlyScroller extends StatelessWidget{
                           WhiteText(text: DateFormat('HH:mm').format(DateTime(now.year,now.month,now.day,time)),),
                           const SizedBox(height: 10,),
                           //TODO API Icon code
-                          const Center(child: CurrentWeatherIcon(iconCode: 113)),
+                          Center(child: CurrentWeatherIcon(iconCode: hourlyList[time].condition.code,)),
                           const SizedBox(height: 20,),
-                          const WhiteText(text: "15°", size: 25),
+                          WhiteText(text: hourlyList[time].tempC.toString(), size: 25),
                         ],
                       ),
                     ),
