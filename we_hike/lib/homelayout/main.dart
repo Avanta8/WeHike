@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:location/location.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
+
+class WeatherApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Layoutbasic',
+      theme: ThemeData(
+        primarySwatch: Colors.blue
+      ),
+      home: Layout(),
+    );
+  }
+}
 
 
 final Widget svg = SvgPicture.asset(
@@ -17,10 +29,10 @@ final Widget svg = SvgPicture.asset(
 );
 
 class Layout extends StatefulWidget {
-  String location;
+  String? location;
   Layout({
     super.key,
-    required this.location,
+    this.location,
   });
 
   @override
@@ -102,10 +114,15 @@ class _LayoutState extends State<Layout> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            child: SizedBox(
-                                    height: 35,
-                                    child: svg,
-                                  ),
+                            child: GestureDetector(
+                              child: SizedBox(
+                                      height: 35,
+                                      child: svg,
+                                    ),
+                              onTap: () {
+                                        // move to search screen
+                                      },
+                            ),
                           ),
                         ),
                         Expanded(
@@ -119,11 +136,11 @@ class _LayoutState extends State<Layout> {
                                     ),
                                   const Align(
                                     alignment: Alignment.centerRight,
-                                    child: WhiteText(text: "Current Location"),
+                                    child: WhiteText(text: "Current Location:"),
                                     ),
                                   Align(
                                     alignment: Alignment.centerRight,
-                                    child: WhiteText(text: widget.location,
+                                    child: WhiteText(text: "Dartmoor",
                                     )
                                     ),
                                 ],
