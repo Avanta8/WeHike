@@ -44,7 +44,7 @@ class HourlyScroller extends StatelessWidget{
                           //TODO API Icon code
                           Center(child: CurrentWeatherIcon(iconCode: hourlyList[time].condition.code,)),
                           const SizedBox(height: 20,),
-                          WhiteText(text: hourlyList[time].tempC.toString(), size: 25),
+                          WhiteText(text: hourlyList[time].tempC.toString()+"°", size: 25),
                         ],
                       ),
                     ),
