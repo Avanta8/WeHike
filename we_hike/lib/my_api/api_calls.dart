@@ -10,34 +10,31 @@ import 'api_service.dart';
 
 
 
-Future<Weather_data> _getData(String userQuery) async {
+Future<Weather_data> getData(String userQuery) async {
     Weather_data _model = (await ApiService().getWeather("&q="+ userQuery.toString().toLowerCase() + "&aqi=no"));
-    //Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
-    //  _weather = _model.current.condition.text;
-    //  _location  = _model.location.name;
-    //  }));
     return _model;
   }
 
-Future<futureModel> _getWeatherForecast(String userQuery) async {
+Future<futureModel> getWeatherForecast(String userQuery) async {
     futureModel _model = (await FutureApiService().getForecast("&q="+ userQuery.toString().toLowerCase() + "&aqi=no"));
-    //Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
-    //  _weather = _model.current.condition.text;
-    //  _location  = _model.location.name;
-    //  }));
     return _model;
   }
 
-Future<Weather_data> _getDataFromCurrentLocation() async {
-    Position currentLocation = await _getLocation();
+Future<Weather_data> getDataFromCurrentLocation() async {
+    Position currentLocation = await getLocation();
     double currentLong = currentLocation.longitude;
     double currentLat = currentLocation.latitude;
-    String LongLat = currentLong.toString() +","+ currentLat.toString();
-    Weather_data _model = (await ApiService().getWeather("&q="+ LongLat.toString().toLowerCase() + "&aqi=no"));
-    //Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
-    //  _weather = _model.current.condition.text;
-    //  _location  = _model.location.name;
-    //  }));
+    String LatLong = currentLat.toStringAsFixed(5).toString() +","+ currentLong.toStringAsFixed(5).toString();
+    Weather_data _model = (await ApiService().getWeather("&q="+ LatLong.toString().toLowerCase() + "&aqi=no"));
+    return _model;
+  }
+
+Future<futureModel> getForecastFromCurrentLocation() async {
+    Position currentLocation = await getLocation();
+    double currentLong = currentLocation.longitude;
+    double currentLat = currentLocation.latitude;
+    String LatLong = currentLat.toStringAsFixed(5).toString() +","+ currentLong.toStringAsFixed(5).toString();
+    futureModel _model = (await FutureApiService().getForecast("&q="+ LatLong.toString().toLowerCase() + "&aqi=no"));
     return _model;
   }
 
@@ -84,7 +81,7 @@ Future<Position> _determinePosition() async {
   return await Geolocator.getCurrentPosition();
 }
 
-Future<Position> _getLocation() async{
+Future<Position> getLocation() async{
     Position position = await _determinePosition();
     return position;
   }
