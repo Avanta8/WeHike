@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:we_hike/search/searchPage.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +9,7 @@ import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
 
 class WeatherApp extends StatelessWidget {
+  const WeatherApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,10 +31,8 @@ final Widget svg = SvgPicture.asset(
 );
 
 class Layout extends StatefulWidget {
-  String? location;
-  Layout({
+  const Layout({
     super.key,
-    this.location,
   });
 
   @override
@@ -43,6 +43,8 @@ class _LayoutState extends State<Layout> {
   // state stuff goes here
   static bool today = true;
 
+  // bar at the bottom of the screen that displays the current data and 
+  // allows the user to switch between data about the weather today and tomorrow
   Widget _bottomBar() {
     if(today == true) {
         return Row(
@@ -121,6 +123,9 @@ class _LayoutState extends State<Layout> {
                                     ),
                               onTap: () {
                                         // move to search screen
+                                        Navigator.push(
+                                          context, 
+                                          MaterialPageRoute(builder: (_) => const search_page()));
                                       },
                             ),
                           ),
@@ -129,12 +134,12 @@ class _LayoutState extends State<Layout> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 20, 15, 5),
                               child: Column(
-                                children: [
-                                  const Align(
+                                children: const [
+                                  Align(
                                     alignment: Alignment.centerRight,
                                     child: ClockWidget()
                                     ),
-                                  const Align(
+                                  Align(
                                     alignment: Alignment.centerRight,
                                     child: WhiteText(text: "Current Location:"),
                                     ),
