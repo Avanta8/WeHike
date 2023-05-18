@@ -3,13 +3,37 @@ import 'package:http/http.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:we_hike/my_api/constants.dart';
-import 'my_api/user_model.dart';
-import 'my_api/api_service.dart';
+import 'package:we_hike/my_api/future_api_service.dart';
+import 'package:we_hike/my_api/future_model.dart';
+import 'user_model.dart';
+import 'api_service.dart';
 
 
 
 Future<Weather_data> _getData(String userQuery) async {
     Weather_data _model = (await ApiService().getWeather("&q="+ userQuery.toString().toLowerCase() + "&aqi=no"));
+    //Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
+    //  _weather = _model.current.condition.text;
+    //  _location  = _model.location.name;
+    //  }));
+    return _model;
+  }
+
+Future<futureModel> _getWeatherForecast(String userQuery) async {
+    futureModel _model = (await FutureApiService().getForecast("&q="+ userQuery.toString().toLowerCase() + "&aqi=no"));
+    //Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
+    //  _weather = _model.current.condition.text;
+    //  _location  = _model.location.name;
+    //  }));
+    return _model;
+  }
+
+Future<Weather_data> _getDataFromCurrentLocation() async {
+    Position currentLocation = await _getLocation();
+    double currentLong = currentLocation.longitude;
+    double currentLat = currentLocation.latitude;
+    String LongLat = currentLong.toString() +","+ currentLat.toString();
+    Weather_data _model = (await ApiService().getWeather("&q="+ LongLat.toString().toLowerCase() + "&aqi=no"));
     //Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
     //  _weather = _model.current.condition.text;
     //  _location  = _model.location.name;

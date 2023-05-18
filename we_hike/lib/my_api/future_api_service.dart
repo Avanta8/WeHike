@@ -6,7 +6,7 @@ import 'constants.dart';
 import 'future_model.dart';
 
 class FutureApiService {
-  Future<futureModel> getWeather(String userSearch) async {
+  Future<futureModel> getForecast(String userSearch) async {
     try {
       var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.usersEndpointFuture);
       if(userSearch != ""){

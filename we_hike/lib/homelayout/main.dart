@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
-import 'package:we_hike/api_calls.dart';
+import 'package:we_hike/my_api/api_calls.dart';
 
 
 

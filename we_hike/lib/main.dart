@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_hike/homelayout/main.dart';
-import 'package:we_hike/api_calls.dart';
+import 'package:we_hike/my_api/api_calls.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:geolocator/geolocator.dart';
@@ -15,8 +15,23 @@ Future<Weather_data> _getData(String userQuery) async {
     //  _weather = _model.current.condition.text;
     //  _location  = _model.location.name;
     //  }));
+    print(_model.current.condition.text);
     return _model;
   }
+
+Future<Weather_data> _getDataFromCurrentLocation() async {
+    Position currentLocation = await _getLocation();
+    double currentLong = currentLocation.longitude;
+    double currentLat = currentLocation.latitude;
+    String LongLat = currentLong.toString() +","+ currentLat.toString();
+    Weather_data _model = (await ApiService().getWeather("&q="+ LongLat.toString().toLowerCase() + "&aqi=no"));
+    //Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {
+    //  _weather = _model.current.condition.text;
+    //  _location  = _model.location.name;
+    //  }));
+    return _model;
+  }
+
 
 Future<Position> _determinePosition() async {
     bool serviceEnabled;
