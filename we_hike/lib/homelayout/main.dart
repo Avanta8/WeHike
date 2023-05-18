@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 class WeatherApp extends StatelessWidget {
@@ -63,12 +62,12 @@ class _LayoutState extends State<Layout> {
   // state stuff goes here
   static bool today = true;
 
-  Widget _hourlyScroller() {
+  Widget _hourlyScroller(futureModel currentWeatherModel) {
     if(today = true) {
-      return Text("Today");
+      return HourlyScroller(weatherModel: currentWeatherModel.forecast.forecastday[0]);
     }
     else {
-      return Text("Tomorrow");
+      return HourlyScroller(weatherModel: currentWeatherModel.forecast.forecastday[1]);
     }
   }
 
@@ -130,6 +129,7 @@ class _LayoutState extends State<Layout> {
     return FutureBuilder(
       future: widget._getWeatherModel(),
       builder: (context, snapshot) {
+        if(snapshot.hasData) {
         futureModel currentWeatherModel = snapshot.data!;
         return Scaffold(
           body: Container(
@@ -217,7 +217,7 @@ class _LayoutState extends State<Layout> {
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
                             height: 200,
-                            child: Expanded(child: HourlyScroller(),)
+                            child: Expanded(child: _hourlyScroller(currentWeatherModel),)
                           ),
                         ),
 
@@ -305,6 +305,10 @@ class _LayoutState extends State<Layout> {
                 ),
           ),
           );
+      }
+      else{
+        throw '';
+      }
       }
     );
   }
