@@ -31,7 +31,7 @@ class _ExpandableDropDown extends State<ExpandableDropDown> {
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           width: MediaQuery.of(context).size.width,
-          height: expanded ? MediaQuery.of(context).size.height / 4 : 100.0,
+          height: expanded ? MediaQuery.of(context).size.height / 4 : 80.0,
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.5),
             borderRadius: BorderRadius.only(
