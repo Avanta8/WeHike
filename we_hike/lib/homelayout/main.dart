@@ -72,7 +72,7 @@ class _LayoutState extends State<Layout> {
     }
   }
 
-  Widget _getBottomHald(futureModel currentWeatherModel) {
+  Widget _getBottomHalf(futureModel currentWeatherModel) {
     if(today = true) {
       return bottomHalf(weatherModel: currentWeatherModel.forecast.forecastday[0]);
     }
