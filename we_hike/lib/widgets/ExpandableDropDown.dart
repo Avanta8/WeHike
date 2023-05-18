@@ -31,7 +31,7 @@ class _ExpandableDropDown extends State<ExpandableDropDown> {
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           width: MediaQuery.of(context).size.width,
-          height: expanded ? MediaQuery.of(context).size.height / 4 : 80.0,
+          height: expanded ? MediaQuery.of(context).size.height / 4 : 80,
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.5),
             borderRadius: BorderRadius.only(
@@ -55,7 +55,7 @@ class _ExpandableDropDown extends State<ExpandableDropDown> {
                       ),
                     ),
                     Text(
-                        widget.data[widget.hournow].toString(),
+                        widget.data[0].toString(),
                         style: widget.textstyle
                     ),
                     IconButton(
@@ -80,7 +80,7 @@ class _ExpandableDropDown extends State<ExpandableDropDown> {
                         final time = TimeOfDay(hour: widget.hournow + index, minute: 0);
                         final formattedTime =
                             '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-                        final value = widget.data[(widget.hournow + index)];
+                        final value = widget.data[index];
 
                         return Padding(
                           padding: const EdgeInsets.all(14.0),
@@ -95,6 +95,10 @@ class _ExpandableDropDown extends State<ExpandableDropDown> {
                               Text(
                                 '$value',
                                 style: widget.textstyle,
+                              ),
+                              SizedBox(
+                                width:48,
+                                height: 20
                               ),
                             ],
                           ),
