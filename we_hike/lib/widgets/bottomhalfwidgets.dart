@@ -26,8 +26,8 @@ class _bottomHalf extends State<bottomHalf>{
   @override
   Widget build(BuildContext context) {
     return ListView(
+        padding: EdgeInsets.zero,
         children: [
-          SunriseSunsetRectangle(sunrisetime: widget.sunrisetime, sunsettime: widget.sunsettime, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Wind Speed', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Cloud Coverage', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Rainfall', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
