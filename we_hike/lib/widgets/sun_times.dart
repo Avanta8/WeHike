@@ -10,7 +10,7 @@ class SunTimes extends StatelessWidget {
     required this.sunsetTime}
   ); 
   
-
+  // This method displays the sunrise and sunset times in a row
   @override
   Widget build(BuildContext context) {
     return Padding(

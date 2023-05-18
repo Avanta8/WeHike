@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_hike/homelayout/main.dart';
-import 'package:provider/provider.dart';
-import 'package:we_hike/main.dart';
-import 'package:we_hike/my_api/api_calls.dart';
+import 'package:we_hike/homelayout/layout.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
