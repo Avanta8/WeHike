@@ -41,9 +41,10 @@ class HourlyScroller extends StatelessWidget{
                           const SizedBox(height: 15,),
                           WhiteText(text: DateFormat('HH:mm').format(DateTime(now.year,now.month,now.day,time)),),
                           const SizedBox(height: 10,),
-                          const Center(child: CurrentWeatherIcon(iconCode: hourlyList[time].condition.code,)),
+                          //TODO API Icon code
+                          Center(child: CurrentWeatherIcon(iconCode: hourlyList[time].condition.code,)),
                           const SizedBox(height: 20,),
-                          const WhiteText(text: hourlyList[time].tempC.toString(), size: 25),
+                          WhiteText(text: hourlyList[time].tempC.toString(), size: 25),
                         ],
                       ),
                     ),
