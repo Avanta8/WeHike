@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
-import 'package:we_hike/api/constants.dart';
-import 'user_model.dart';
-import 'api_service.dart';
+import 'package:we_hike/my_api/constants.dart';
+import 'my_api/user_model.dart';
+import 'my_api/api_service.dart';
+
+
 
 Future<Weather_data> _getData(String userQuery) async {
     Weather_data _model = (await ApiService().getWeather("&q="+ userQuery.toString().toLowerCase() + "&aqi=no"));
