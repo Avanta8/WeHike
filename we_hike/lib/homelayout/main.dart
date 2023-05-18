@@ -5,10 +5,11 @@ import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 
+
+
 void main() {
   runApp(HomePage());
 }
-
 
 final Widget svg = SvgPicture.asset(
   'assets/magnifying-glass-solid.svg',

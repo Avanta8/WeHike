@@ -19,13 +19,14 @@ class ApiService {
       if (response.statusCode == 200) {
         print("diagnostic_1");
         Weather_data _model = Weather_dataFromJson(response.body);
+        print(_model.toString());
         print('Diagnostic_2');
         return _model;
       }
     } catch (e) {
-      print("issue");
-      log(e.toString());
-      print(e);
+        print("issue");
+        log(e.toString());
+        print(e);
     }
     Condition temporary_condition =  Condition(text: "NoWhere", icon: "NoWhere", code: 0);
     Current temporary_current = Current(lastUpdatedEpoch: 0, lastUpdated : "Nowhere", tempC: 0, tempF: 0, isDay: 0, condition: temporary_condition, windMph: 0, windKph: 0, windDegree: 0, windDir: "Nowhere", pressureMb: 0, pressureIn: 0, precipMm: 0, precipIn: 0, humidity: 0, cloud: 0, feelslikeC: 0, feelslikeF: 0, visKm: 0, visMiles: 0, uv: 0, gustMph: 0, gustKph: 0);
