@@ -159,6 +159,11 @@ class Condition {
         "icon": icon,
         "code": code,
     };
+
+    @override
+    String toString() {
+      return text;
+    }
 }
 
 class Forecast {

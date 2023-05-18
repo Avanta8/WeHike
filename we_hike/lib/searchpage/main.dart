@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:we_hike/homelayout/main.dart';
 import 'package:provider/provider.dart';
 import 'package:we_hike/main.dart';
+import 'package:we_hike/my_api/api_calls.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -27,7 +28,7 @@ class SearchPage extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Layout(key: key)));
+                MaterialPageRoute(builder: (context) => Layout(key: key,)));
               },
             ),
           ),
@@ -84,7 +85,7 @@ class SearchFrame extends StatelessWidget {
 
       crossAxisAlignment: CrossAxisAlignment.stretch,
 
-      children: [
+      children: const [
         NamedSearchWidget(),
         Padding(padding: EdgeInsets.all(10)),
         CoordinateSearchWidget(),
@@ -113,7 +114,7 @@ class NamedSearchWidget extends StatelessWidget {
           }
         },
         icon: const Icon(Icons.search),
-        label: Text("Search"),
+        label: const Text("Search"),
       ),
     );
   }
@@ -129,7 +130,7 @@ class CoordinateSearchWidget extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {},
         icon: const Icon(Icons.explore),
-        label: Text("Search Coordinates"),
+        label: const Text("Search Coordinates"),
       ),
     );
   }
@@ -146,7 +147,7 @@ class UseLocationButton extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {},
         icon: const Icon(Icons.my_location),
-        label: Text("Use my location"),
+        label: const Text("Use my location"),
       ),
     );
   }

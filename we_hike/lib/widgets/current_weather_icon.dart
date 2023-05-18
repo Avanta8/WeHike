@@ -110,9 +110,8 @@ class CurrentWeatherIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
         child: Align(
           alignment: Alignment.centerRight,
           child: SizedBox(
@@ -124,7 +123,6 @@ class CurrentWeatherIcon extends StatelessWidget {
                 ),
               ),
             ),
-        ),
     );
   }
 }
