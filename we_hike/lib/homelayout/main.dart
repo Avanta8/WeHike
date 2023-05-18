@@ -4,6 +4,10 @@ import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
+import 'package:we_hike/widgets/sun_times.dart';
+import 'package:we_hike/widgets/current_weather_icon.dart';
+// importing icons
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 
 
@@ -32,7 +36,14 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class Layout extends StatelessWidget {
+class Layout extends StatefulWidget {
+  @override
+  State<Layout> createState() => _LayoutState();
+}
+
+class _LayoutState extends State<Layout> {
+  // state stuff goes here
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,16 +74,16 @@ class Layout extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 20, 15, 5),
                               child: Column(
-                                children: [
+                                children: const [
                                   Align(
                                     alignment: Alignment.centerRight,
-                                    child: ClockWidget(key: key,)
+                                    child: ClockWidget()
                                     ),
-                                  const Align(
+                                  Align(
                                     alignment: Alignment.centerRight,
                                     child: WhiteText(text: "Current Location"),
                                     ),
-                                  const Align(
+                                  Align(
                                     alignment: Alignment.centerRight,
                                     child: WhiteText(text: 
                                       "Dartmoor",
@@ -84,7 +95,6 @@ class Layout extends StatelessWidget {
                         ),
                       ],
                     ),
-      
                     Row(
                       children: [
                         Expanded(
@@ -107,18 +117,10 @@ class Layout extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              color: Colors.blue,
-                              child: const Center(child: Text("# weather icon #")),
-                            ),
-                          ),
-                        ),
+                        const CurrentWeatherIcon(),
                       ],
                     ),
-      
+
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
@@ -126,7 +128,7 @@ class Layout extends StatelessWidget {
                         child: Expanded(child: HourlyScroller(),)
                       ),
                     ),
-      
+                    const SunTimes(sunriseTime: "06:07", sunsetTime: "21:42"),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
