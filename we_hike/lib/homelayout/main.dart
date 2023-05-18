@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:we_hike/search/searchPage.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
-// importing icons
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 
 
-
-void main() {
-  runApp(HomePage());
-}
-
-final Widget svg = SvgPicture.asset(
-  'assets/magnifying-glass-solid.svg',
-  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-  semanticsLabel: 'Magnifying glass',
-  alignment: Alignment.centerLeft,
-);
-
-
-class HomePage extends StatelessWidget {
+class WeatherApp extends StatelessWidget {
+  const WeatherApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,13 +25,93 @@ class HomePage extends StatelessWidget {
   }
 }
 
+final Widget svg = SvgPicture.asset(
+  'assets/magnifying-glass-solid.svg',
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Magnifying glass',
+  alignment: Alignment.centerLeft,
+);
+
 class Layout extends StatefulWidget {
+  const Layout({
+    super.key,
+  });
+
   @override
   State<Layout> createState() => _LayoutState();
+
+  Future<String> _getLocationFromMemory() async {
+    final prefs = await SharedPreferences.getInstance();
+    String storedLocation = prefs.getString('location') ?? "London";
+    return storedLocation;
+  }
 }
 
 class _LayoutState extends State<Layout> {
   // state stuff goes here
+  static bool today = true;
+
+  Widget _hourlyScroller() {
+    if(today = true) {
+      return Text("Today");
+    }
+    else {
+      return Text("Tomorrow");
+    }
+  }
+
+  // bar at the bottom of the screen that displays the current data and 
+  // allows the user to switch between data about the weather today and tomorrow
+  Widget _bottomBar() {
+    if(today == true) {
+        return Row(
+          children: [
+            const Expanded(
+              flex: 1,
+              child: FittedBox()
+              ),
+            Expanded(
+              flex: 4,
+              child: Center(child: WhiteText(text: DateFormat("EEEEE dd/mm/yyyy").format(DateTime.now()).toString()))
+              ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(child: const Icon(Icons.arrow_circle_right_outlined, color: Colors.white,),
+              onTap: () {
+                setState(() {
+                  _LayoutState.today = false;
+                });
+              },
+              ),
+              )
+          ],
+        );
+    }
+    else {
+        return Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: GestureDetector(child: const Icon(Icons.arrow_circle_left_outlined, color: Colors.white,),
+              onTap: () {
+                setState(() {
+                  _LayoutState.today = true;
+                });
+              },
+              ),
+              ),
+            Expanded(
+              flex: 4,
+              child: Center(child: WhiteText(text: DateFormat("EEEEE dd/mm/yyyy").format(DateTime.now()).toString()))
+              ),
+            const Expanded(
+              flex: 1,
+              child: FittedBox()
+              ),
+          ],
+        );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +133,18 @@ class _LayoutState extends State<Layout> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            child: SizedBox(
-                                    height: 35,
-                                    child: svg,
-                                  ),
+                            child: GestureDetector(
+                              child: SizedBox(
+                                      height: 35,
+                                      child: svg,
+                                    ),
+                              onTap: () {
+                                        // move to search screen
+                                        Navigator.push(
+                                          context, 
+                                          MaterialPageRoute(builder: (context) => const search_page()));
+                                      },
+                            ),
                           ),
                         ),
                         Expanded(
@@ -81,12 +158,11 @@ class _LayoutState extends State<Layout> {
                                     ),
                                   Align(
                                     alignment: Alignment.centerRight,
-                                    child: WhiteText(text: "Current Location"),
+                                    child: WhiteText(text: "Current Location:"),
                                     ),
                                   Align(
                                     alignment: Alignment.centerRight,
-                                    child: WhiteText(text: 
-                                      "Dartmoor",
+                                    child: WhiteText(text: "Dartmoor",
                                     )
                                     ),
                                 ],
@@ -117,7 +193,7 @@ class _LayoutState extends State<Layout> {
                             ),
                           ),
                         ),
-                        const CurrentWeatherIcon(),
+                        const CurrentWeatherIcon(iconCode: 113,),
                       ],
                     ),
 
@@ -128,6 +204,7 @@ class _LayoutState extends State<Layout> {
                         child: Expanded(child: HourlyScroller(),)
                       ),
                     ),
+
                     const SunTimes(sunriseTime: "06:07", sunsetTime: "21:42"),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -204,11 +281,9 @@ class _LayoutState extends State<Layout> {
                         ),
                       ),
                     ),
-      
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                          child: Center(child: WhiteText(text: DateFormat("EEEEE dd/mm/yyyy").format(DateTime.now()).toString())),
-                        ),
+
+                    Padding(padding: const EdgeInsets.all(8),
+                    child: _bottomBar(),)
                 ],
               )
             ),

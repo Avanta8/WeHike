@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/white_text.dart';
 
 class HourlyScroller extends StatelessWidget{
+  const HourlyScroller({super.key});
+
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
