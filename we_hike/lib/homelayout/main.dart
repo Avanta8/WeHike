@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:we_hike/my_api/api_calls.dart';
 import 'package:we_hike/my_api/future_model.dart';
 import 'package:we_hike/searchpage/main.dart';
+import 'package:we_hike/widgets/SunriseSunsetRectangle.dart';
+import 'package:we_hike/widgets/bottomhalfwidgets.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
@@ -221,82 +223,32 @@ class _LayoutState extends State<Layout> {
                           ),
                         ),
 
-                        const SunTimes(sunriseTime: "06:07", sunsetTime: "21:42"),
-                        Padding(
+                      Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            color: Colors.amber,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: const [
-                                  Expanded(
-                                    flex: 5,
-                                    child: Text("Wind speed")
-                                    ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Text("2 km/h")
-                                    ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(child: Text("v"))
-                                    )
-                              ]),
-                            ),
-                          ),
-                        ),
-          
-                        Padding(
+                              width: MediaQuery.of(context).size.width,
+                              height: 100,
+                              child: SunriseSunsetRectangle(sunrisetime: '05:10', sunsettime: '20:55', textstyle: TextStyle(fontSize: 20, color: Colors.white))
+                          )
+                      ),
+
+                      Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            color: Colors.amber,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: const [
-                                  Expanded(
-                                    flex: 5,
-                                    child: Text("Cloud Coverage")
-                                    ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Text("12%")
-                                    ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(child: Text("v"))
-                                    )
-                              ]),
-                            ),
-                          ),
-                        ),
-          
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            color: Colors.amber,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: const [
-                                  Expanded(
-                                    flex: 5,
-                                    child: Text("Chance of Rainfall")
-                                    ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Text("25%")
-                                    ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text("v"))
-                                    )
-                              ]),
-                            ),
-                          ),
-                        ),
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              child: bottomHalf(
+                                  sunrisetime: '05:32',
+                                  sunsettime: '20:55',
+                                  cloudcoverage: [10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+                                  windspeed: [10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+                                  rainfall: [10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+                                  hournow: 10,
+                                  warnings: ['Warning 1', 'Warning 2'],
+                                  textstyle: TextStyle(fontSize: 20, color: Colors.white)
+                              )
+                          )
+                      ),
 
                         Padding(padding: const EdgeInsets.all(8),
                         child: _bottomBar(),)
