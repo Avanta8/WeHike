@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:we_hike/search/searchPage.dart';
+import 'package:we_hike/searchpage/main.dart';
 import 'package:we_hike/widgets/white_text.dart';
 import 'package:we_hike/widgets/clock.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +8,6 @@ import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 
 
 class WeatherApp extends StatelessWidget {
@@ -142,7 +141,7 @@ class _LayoutState extends State<Layout> {
                                         // move to search screen
                                         Navigator.push(
                                           context, 
-                                          MaterialPageRoute(builder: (context) => const search_page()));
+                                          MaterialPageRoute(builder: (context) => const SearchPage()));
                                       },
                             ),
                           ),
