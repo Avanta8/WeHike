@@ -22,7 +22,7 @@ class HourlyScroller extends StatelessWidget{
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(0.5),
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topLeft:Radius.circular(20),
                           topRight:Radius.circular(20),
                           bottomLeft: Radius.circular(20),
@@ -34,13 +34,13 @@ class HourlyScroller extends StatelessWidget{
                       child:
                       Column(
                         children: [
-                          SizedBox(height: 15,),
+                          const SizedBox(height: 15,),
                           WhiteText(text: DateFormat('HH:mm').format(DateTime(now.year,now.month,now.day,time)),),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           //TODO API Icon code
-                          Center(child: CurrentWeatherIcon(iconCode: 113)),
-                          SizedBox(height: 20,),
-                          WhiteText(text: "15°", size: 25),
+                          const Center(child: CurrentWeatherIcon(iconCode: 113)),
+                          const SizedBox(height: 20,),
+                          const WhiteText(text: "15°", size: 25),
                         ],
                       ),
                     ),
