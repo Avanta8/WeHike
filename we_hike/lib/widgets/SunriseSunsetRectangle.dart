@@ -25,6 +25,7 @@ class _SunriseSunsetRectangle extends State<SunriseSunsetRectangle>{
           duration: const Duration(milliseconds: 500),
           curve: Curves.easeInOut,
           width: MediaQuery.of(context).size.width,
+          height: 80,
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.5),
             borderRadius: BorderRadius.only(
