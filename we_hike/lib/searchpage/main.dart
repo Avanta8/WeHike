@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_hike/homelayout/main.dart';
 import 'package:provider/provider.dart';
 import 'package:we_hike/main.dart';
 
@@ -25,8 +26,8 @@ class SearchPage extends StatelessWidget {
                 color: Colors.green,
               ),
               onTap: () {
-                // Navigator.push(context,
-                // MaterialPageRoute(builder: (context) => Layout(key: key)));
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Layout(key: key)));
               },
             ),
           ),
