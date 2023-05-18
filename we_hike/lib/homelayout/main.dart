@@ -72,12 +72,12 @@ class _LayoutState extends State<Layout> {
     }
   }
 
-  Widget _getBottomHalf(futureModel currentWeatherModel) {
+  Widget _getBottomHalf({required futureModel weatherModel}) {
     if(today = true) {
-      return bottomHalf(weatherModel: currentWeatherModel.forecast.forecastday[0]);
+      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[0], hournow: DateTime.now().hour, textstyle: TextStyle(fontSize: 20, color: Colors.white),);
     }
     else {
-      return bottomHalf(weatherModel: currentWeatherModel.forecast.forecastday[1]);
+      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[1], textstyle: TextStyle(fontSize: 20, color: Colors.white), hournow: DateTime.now().hour,);
     }
   }
 

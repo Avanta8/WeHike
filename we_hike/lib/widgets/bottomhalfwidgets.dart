@@ -1,37 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:we_hike/my_api/future_model.dart';
 import 'package:we_hike/widgets/ExpandableDropDown.dart';
 import 'package:we_hike/widgets/SunriseSunsetRectangle.dart';
 import 'package:we_hike/widgets/weatherwarnings.dart';
 
 class bottomHalf extends StatefulWidget{
 
-  final String sunrisetime;
-  final String sunsettime;
-  final List<double> windspeed;
-  final List<double> cloudcoverage;
-  final List<double> rainfall;
-  final List<String> warnings;
+  final Forecastday weatherModel;
   final int hournow;
   final TextStyle textstyle;
 
-  bottomHalf({required this.sunrisetime, required this.sunsettime, required this.textstyle, required this.windspeed, required this.cloudcoverage, required this.rainfall, required this.hournow, required this.warnings});
+  bottomHalf({required this.textstyle, required this.weatherModel, required this.hournow,});
 
   @override
   _bottomHalf createState() => _bottomHalf();
 }
 
 class _bottomHalf extends State<bottomHalf>{
+  List<double> windspeed = [];
+  List<double> cloudcoverage = [];
+  List<double> rainfall = [];
 
   @override
   Widget build(BuildContext context) {
+
+  for (int i = 0; i < 24; i++) {
+  var current = widget.weatherModel.hour[i];
+  windspeed.add(current.windMph);
+  cloudcoverage.add(current.cloud.toDouble());
+  rainfall.add(current.precipMm);
+  }
+
     return ListView(
         padding: EdgeInsets.zero,
         children: [
-          ExpandableDropDown(name: 'Wind Speed', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
-          ExpandableDropDown(name: 'Cloud Coverage', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
-          ExpandableDropDown(name: 'Rainfall', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
-          WeatherWarnings(name: 'Weather Warnings', data: widget.warnings, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Wind Speed', data: windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Cloud Coverage', data: cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Rainfall', data: rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
+          //WeatherWarnings(name: 'Weather Warnings', data: widget.warnings, textstyle: widget.textstyle),
         ],
     );
   }
