@@ -8,6 +8,8 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
 	<string></string>
+	<key>NSLocationUsageDescription</key>
+	<string>This app needs access to location.</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -28,5 +30,10 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
+	<dict>
+  		<key>YourPurposeKey</key>
+  		<string>The example App requires temporary access to the device&apos;s precise location.</string>
+	</dict>
 </dict>
 </plist>

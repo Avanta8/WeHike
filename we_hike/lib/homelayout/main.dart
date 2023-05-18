@@ -8,6 +8,7 @@ import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/sun_times.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 
 class WeatherApp extends StatelessWidget {
@@ -23,7 +24,6 @@ class WeatherApp extends StatelessWidget {
     );
   }
 }
-
 
 final Widget svg = SvgPicture.asset(
   'assets/magnifying-glass-solid.svg',
@@ -151,7 +151,7 @@ class _LayoutState extends State<Layout> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 20, 15, 5),
                               child: Column(
-                                children: [
+                                children: const [
                                   Align(
                                     alignment: Alignment.centerRight,
                                     child: ClockWidget()
