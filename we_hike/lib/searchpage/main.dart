@@ -18,7 +18,20 @@ class SearchPage extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 2, // 20%
+            flex: 1,
+            child: GestureDetector(
+              child: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.green,
+              ),
+              onTap: () {
+                // Navigator.push(context,
+                // MaterialPageRoute(builder: (context) => Layout(key: key)));
+              },
+            ),
+          ),
+          Expanded(
+            flex: 1, // 20%
             child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
           ),
           const Expanded(
@@ -95,7 +108,7 @@ class NamedSearchWidget extends StatelessWidget {
             delegate: NamedSearchDelelgate(),
           );
           if (selectedLocation is String) {
-            appState.setSearchLocation(selectedLocation);
+            // appState.setSearchLocation(selectedLocation);
           }
         },
         icon: const Icon(Icons.search),
