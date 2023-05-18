@@ -8,26 +8,25 @@ import 'package:we_hike/my_api/future_model.dart';
 import 'user_model.dart';
 import 'api_service.dart';
 
-Future<Weather_data> getData(String userQuery) async {
-  Weather_data _model = (await ApiService()
-      .getWeather("&q=" + userQuery.toString().toLowerCase() + "&aqi=no"));
+Future<Weather_data?> getData(String userQuery) async {
+  Weather_data? _model = (await ApiService().getWeather("&q=" + userQuery.toString().toLowerCase() + "&aqi=no"));
   return _model;
 }
 
 Future<futureModel?> getWeatherForecast(String userQuery) async {
   futureModel? _model = (await FutureApiService()
-      .getForecast("&q=" + userQuery.toString().toLowerCase() + "&aqi=no"));
+      .getForecast("&q=" + userQuery.toString().toLowerCase() + "&days=2&aqi=no"));
   return _model;
 }
 
-Future<Weather_data> getDataFromCurrentLocation() async {
+Future<Weather_data?> getDataFromCurrentLocation() async {
   Position currentLocation = await getLocation();
   double currentLong = currentLocation.longitude;
   double currentLat = currentLocation.latitude;
   String LatLong = currentLat.toStringAsFixed(5).toString() +
       "," +
       currentLong.toStringAsFixed(5).toString();
-  Weather_data _model = (await ApiService()
+  Weather_data? _model = (await ApiService()
       .getWeather("&q=" + LatLong.toString().toLowerCase() + "&aqi=no"));
   return _model;
 }
@@ -40,7 +39,7 @@ Future<futureModel?> getForecastFromCurrentLocation() async {
       "," +
       currentLong.toStringAsFixed(5).toString();
   futureModel? _model = (await FutureApiService()
-      .getForecast("&q=" + LatLong.toString().toLowerCase() + "&aqi=no"));
+      .getForecast("&q=" + LatLong.toString().toLowerCase() + "&days=2&aqi=no"));
   return _model;
 }
 
