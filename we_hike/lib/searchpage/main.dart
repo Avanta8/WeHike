@@ -97,7 +97,7 @@ class NamedSearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<AppState>();
+    // var appState = context.watch<AppState>();
 
     return Directionality(
       textDirection: TextDirection.rtl,
