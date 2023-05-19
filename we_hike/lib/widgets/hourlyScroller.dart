@@ -12,11 +12,19 @@ class HourlyScroller extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
+    int time;
+    if (now.day >= weatherModel.date.day)
+    {
+      time = 0;
+    }
+    else{
+      time = now.hour;
+    }
     List<Hour> hourlyList = weatherModel.hour;
     return ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          for (int time = now.hour; time <= 23;time++)
+          for (int i = time; i <= 23;i++)
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: Card(
@@ -39,12 +47,12 @@ class HourlyScroller extends StatelessWidget{
                       Column(
                         children: [
                           const SizedBox(height: 15,),
-                          WhiteText(text: DateFormat('HH:mm').format(DateTime(now.year,now.month,now.day,time)),),
+                          WhiteText(text: DateFormat('HH:mm').format(DateTime(now.year,now.month,now.day,i)),),
                           const SizedBox(height: 10,),
                           //TODO API Icon code
-                          Center(child: CurrentWeatherIcon(iconCode: hourlyList[time].condition.code,)),
+                          Center(child: CurrentWeatherIcon(iconCode: hourlyList[i].condition.code,)),
                           const SizedBox(height: 20,),
-                          WhiteText(text: hourlyList[time].tempC.floor().toString()+"°", size: 25),
+                          WhiteText(text: hourlyList[i].tempC.floor().toString()+"°", size: 25),
                         ],
                       ),
                     ),
