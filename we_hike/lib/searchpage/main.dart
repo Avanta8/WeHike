@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_hike/homelayout/main.dart';
-import 'package:provider/provider.dart';
-import 'package:we_hike/main.dart';
+import 'package:we_hike/homelayout/layout.dart';
 import 'package:we_hike/my_api/api_calls.dart';
 import 'package:we_hike/my_api/future_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,8 +27,12 @@ class SearchPage extends StatelessWidget {
                 color: Colors.green,
               ),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Layout(key: key)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Layout(
+                              key: key,
+                            )));
               },
             ),
           ),
@@ -140,7 +142,7 @@ class CoordinateSearchWidget extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {},
         icon: const Icon(Icons.explore),
-        label: Text("Search Coordinates"),
+        label: const Text("Search Coordinates"),
       ),
     );
   }
@@ -157,7 +159,7 @@ class UseLocationButton extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {},
         icon: const Icon(Icons.my_location),
-        label: Text("Use my location"),
+        label: const Text("Use my location"),
       ),
     );
   }

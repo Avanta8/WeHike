@@ -8,6 +8,7 @@ class CurrentWeatherIcon extends StatelessWidget {
     required this.iconCode,
   });
 
+  // This method converts the api weaather icon code into a cupertino icon that flutter can display
   Widget _getWeatherIcon() {
     switch(iconCode) {
       case 1282:
@@ -108,13 +109,15 @@ class CurrentWeatherIcon extends StatelessWidget {
     return const Icon(Icons.cloud);
   }
 
+  // The build method returns the appropriate widget with some padding
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
         child: Align(
           alignment: Alignment.centerRight,
+
+          // The combination of SizedBox and FittedBox allows the widget to expand to a fixed size
           child: SizedBox(
             width: 50,
             height: 50,
@@ -124,7 +127,6 @@ class CurrentWeatherIcon extends StatelessWidget {
                 ),
               ),
             ),
-        ),
     );
   }
 }
