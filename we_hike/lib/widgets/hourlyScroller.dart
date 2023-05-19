@@ -15,10 +15,10 @@ class HourlyScroller extends StatelessWidget{
     int time;
     if (now.day >= weatherModel.date.day)
     {
-      time = 0;
+      time = now.hour;
     }
     else{
-      time = now.hour;
+      time = 0;
     }
     List<Hour> hourlyList = weatherModel.hour;
     return ListView(
@@ -52,7 +52,7 @@ class HourlyScroller extends StatelessWidget{
                           //TODO API Icon code
                           Center(child: CurrentWeatherIcon(iconCode: hourlyList[i].condition.code,)),
                           const SizedBox(height: 20,),
-                          WhiteText(text: hourlyList[i].tempC.floor().toString()+"°", size: 25),
+                          WhiteText(text: hourlyList[i].tempC.toString()+"°", size: 25),
                         ],
                       ),
                     ),
