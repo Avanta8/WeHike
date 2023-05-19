@@ -200,6 +200,7 @@ class NamedSearchDelelgate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     // Center(child: Text(query));
     List suggestions = [
+      if (query.isNotEmpty) query,
       "London",
       "China",
       "Brazil",
@@ -224,27 +225,30 @@ class NamedSearchDelelgate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    // close(context, query);
+    // return const Placeholder();
     return buildResults(context);
-    List suggestions = [
-      "London",
-      "China",
-      "Brazil",
-    ];
 
-    return ListView.builder(
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        final suggestion = suggestions[index];
+    //   List suggestions = [
+    //     "London",
+    //     "China",
+    //     "Brazil",
+    //   ];
 
-        return ListTile(
-          title: Text(suggestion),
-          onTap: () {
-            query = suggestion;
+    //   return ListView.builder(
+    //     itemCount: suggestions.length,
+    //     itemBuilder: (context, index) {
+    //       final suggestion = suggestions[index];
 
-            showResults(context);
-          },
-        );
-      },
-    );
+    //       return ListTile(
+    //         title: Text(suggestion),
+    //         onTap: () {
+    //           query = suggestion;
+
+    //           showResults(context);
+    //         },
+    //       );
+    //     },
+    //   );
   }
 }
