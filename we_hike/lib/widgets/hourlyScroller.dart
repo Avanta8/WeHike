@@ -16,7 +16,7 @@ class HourlyScroller extends StatelessWidget{
     return ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          for (int time = 0; time <= 23;time++)
+          for (int time = now.hour; time <= 23;time++)
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: Card(
