@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:we_hike/homelayout/main.dart';
 import 'package:provider/provider.dart';
 import 'package:we_hike/main.dart';
+import 'package:we_hike/my_api/api_calls.dart';
+import 'package:we_hike/my_api/future_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -27,7 +30,7 @@ class SearchPage extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Layout(key: key)));
+                    MaterialPageRoute(builder: (context) => Layout(key: key)));
               },
             ),
           ),
@@ -84,7 +87,7 @@ class SearchFrame extends StatelessWidget {
 
       crossAxisAlignment: CrossAxisAlignment.stretch,
 
-      children: [
+      children: const [
         NamedSearchWidget(),
         Padding(padding: EdgeInsets.all(10)),
         CoordinateSearchWidget(),
@@ -98,22 +101,30 @@ class NamedSearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var appState = context.watch<AppState>();
-
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
         onPressed: () async {
+          final navigator = Navigator.of(context);
           final selectedLocation = await showSearch(
             context: context,
             delegate: NamedSearchDelelgate(),
           );
           if (selectedLocation is String) {
-            // appState.setSearchLocation(selectedLocation);
+            final futuremodel = getWeatherForecast(selectedLocation);
+            navigator.push(
+              MaterialPageRoute(
+                builder: (context) => Layout(
+                  key: key,
+                  weatherForecast: futuremodel,
+                ),
+              ),
+            );
+            // }
           }
         },
         icon: const Icon(Icons.search),
-        label: Text("Search"),
+        label: const Text("Search"),
       ),
     );
   }
@@ -177,9 +188,9 @@ class NamedSearchDelelgate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     // Center(child: Text(query));
     List suggestions = [
-      "London1",
-      "China1",
-      "Brazil1",
+      "London",
+      "China",
+      "Brazil",
     ];
 
     return ListView.builder(
