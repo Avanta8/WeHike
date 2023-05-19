@@ -153,11 +153,21 @@ class UseLocationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
-        onPressed: () {},
+        onPressed: () {
+          final futuremodel = getForecastFromCurrentLocation();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Layout(
+                key: key,
+                weatherForecast: futuremodel,
+              ),
+            ),
+          );
+        },
         icon: const Icon(Icons.my_location),
         label: const Text("Use my location"),
       ),
