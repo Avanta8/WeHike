@@ -5,12 +5,12 @@ import 'package:we_hike/homelayout/home_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:we_hike/searchpage/main.dart';
 
-
 // this class starts the app by calling the Layout() method
 class WeatherApp extends StatelessWidget {
   const WeatherApp({super.key});
   @override
   Widget build(BuildContext context) {
+    requestPermission();
     return MaterialApp(
       home: Layout(),
     );
@@ -35,7 +35,7 @@ class Layout extends StatefulWidget {
       return weatherForecast;
     }
     else {
-      return getWeatherForecast("Edinburgh");
+      return getForecastFromCurrentLocation();
     }
   }
 
