@@ -58,6 +58,24 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  String _getSunriseTime({required futureModel weatherModel}) {
+    if(today == true) {
+      return weatherModel.forecast.forecastday[0].astro.sunrise;
+    }
+    else {
+      return weatherModel.forecast.forecastday[1].astro.sunrise;
+    }
+  }
+
+  String _getSunssetTime({required futureModel weatherModel}) {
+    if(today == true) {
+      return weatherModel.forecast.forecastday[0].astro.sunset;
+    }
+    else {
+      return weatherModel.forecast.forecastday[1].astro.sunset;
+    }
+  }
+
   // bar at the bottom of the screen that displays the current date and 
   // allows the user to switch between data about the weather today and tomorrow
   Widget _bottomBar() {
@@ -230,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: 100,
-                              child: SunriseSunsetRectangle(sunrisetime: '05:10', sunsettime: '20:55', textstyle: const TextStyle(fontSize: 20, color: Colors.white))
+                              child: SunriseSunsetRectangle(sunrisetime: _getSunriseTime(weatherModel: currentWeatherModel), sunsettime: _getSunssetTime(weatherModel: currentWeatherModel), textstyle: const TextStyle(fontSize: 20, color: Colors.white))
                           )
                       ),
 
