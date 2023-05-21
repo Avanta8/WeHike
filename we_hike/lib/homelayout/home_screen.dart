@@ -58,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  // returns the sunrise time for today or tomorrow as appropriate
   String _getSunriseTime({required futureModel weatherModel}) {
     if(today == true) {
       return weatherModel.forecast.forecastday[0].astro.sunrise;
@@ -67,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  // returns the sunset time for today or tomorrow as appropriate
   String _getSunssetTime({required futureModel weatherModel}) {
     if(today == true) {
       return weatherModel.forecast.forecastday[0].astro.sunset;

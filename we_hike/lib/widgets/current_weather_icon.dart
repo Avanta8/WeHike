@@ -114,8 +114,7 @@ class CurrentWeatherIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
-        child: Align(
-          alignment: Alignment.centerRight,
+        child: Center(
 
           // The combination of SizedBox and FittedBox allows the widget to expand to a fixed size
           child: SizedBox(
