@@ -78,23 +78,24 @@ class _LayoutState extends State<Layout> {
             ),
           child: GestureDetector(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               // the GestureDetector allows the magnifying glass to direct us to the search page when pressed
-              child: GestureDetector(
-                child: SizedBox(
-                        height: 35,
-                        width: 35,
-                        child: widget.svg,
-                      ),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: SizedBox(
+                          height: 35,
+                          width: 35,
+                          child: widget.svg,
+                        ),
+                ),
                 // move to search screen
-                onTap: () {
+              ),
+              onTap: () {
                           Navigator.push(
                             context, 
                             MaterialPageRoute(builder: (context) => const SearchPage()));
                         },
-              ),
             ),
-          )
           )
         );
       }
