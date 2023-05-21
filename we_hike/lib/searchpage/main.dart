@@ -78,7 +78,7 @@ class MainFrame extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           // Text('A random idea:'),
-          Padding(padding: EdgeInsets.all(40.0)),
+          Padding(padding: EdgeInsets.all(120.0)),
           // Placeholder(),
           // Expanded(child: SearchFrame()),
           SearchFrame(),
@@ -120,7 +120,7 @@ class NamedSearchWidget extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.withOpacity(0.5),
+          backgroundColor: Colors.grey.withOpacity(0.8),
           minimumSize: const Size(0, 60),
           textStyle: const TextStyle(fontSize: 20),
         ),
