@@ -40,10 +40,10 @@ class _bottomHalf extends State<bottomHalf>{
     return ListView(
         padding: EdgeInsets.zero,
         children: [
-          ExpandableDropDown(name: 'Feels Like' , data: widget.feelslike, hournow: widget.hournow, textstyle: widget.textstyle),
-          ExpandableDropDown(name: 'Wind Speed', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
-          ExpandableDropDown(name: 'Cloud Coverage', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
-          ExpandableDropDown(name: 'Rainfall', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Feels Like (°c)' , data: widget.feelslike, hournow: widget.hournow, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Wind Speed (kmp/h)', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Cloud Coverage (%)', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Rainfall (mm)', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
           //WeatherWarnings(name: 'Weather Warnings', data: widget.warnings, textstyle: widget.textstyle),
         ],
     );
