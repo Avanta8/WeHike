@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
 
+
 // This class contains the home screen of the app
 class HomeScreen extends StatefulWidget {
   final futureModel currentWeatherModel;
@@ -17,7 +18,6 @@ class HomeScreen extends StatefulWidget {
     super.key,
     required this.currentWeatherModel,
   });
-
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
