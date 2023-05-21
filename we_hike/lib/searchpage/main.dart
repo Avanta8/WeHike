@@ -4,6 +4,29 @@ import 'package:we_hike/my_api/api_calls.dart';
 import 'package:we_hike/my_api/future_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class BackButton extends StatelessWidget {
+  const BackButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: const Icon(
+        Icons.arrow_circle_left,
+        color: Colors.white,
+        size: 50,
+      ),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Layout(
+                      key: key,
+                    )));
+      },
+    );
+  }
+}
+
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
@@ -19,21 +42,11 @@ class SearchPage extends StatelessWidget {
       )),
       child: Row(
         children: [
-          Expanded(
+          const Expanded(
             flex: 1,
-            child: GestureDetector(
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.green,
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Layout(
-                              key: key,
-                            )));
-              },
+            child: Align(
+              alignment: FractionalOffset(0.4, 0.025),
+              child: BackButton(),
             ),
           ),
           Expanded(
