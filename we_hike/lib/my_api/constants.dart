@@ -5,5 +5,5 @@ class ApiConstants {
 
   static String apiKey = "e196f5298cf24fef84f141549230905";
   static String usersEndpoint = '&q=lisbon&aqi=no';
-  static String usersEndpointFuture = '&q=lisbon&days=2&aqi=no&alerts=no';
+  static String usersEndpointFuture = '&q=lisbon&days=2&aqi=no&alerts=yes';
 }

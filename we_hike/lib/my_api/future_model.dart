@@ -4,35 +4,56 @@
 
 import 'dart:convert';
 
+//function defining the calling of the factory constructor of the model class to generate a model from a api json output
 futureModel futureModelFromJson(String str) => futureModel.fromJson(json.decode(str));
-
+//reverse function
 String futureModelToJson(futureModel data) => json.encode(data.toJson());
 
 class futureModel {
+  //this model has 3 attributes which are location information, current weather at location, and weather forecast
     Location_json location;
     Current current;
     Forecast forecast;
+    Alerts alerts;
 
     futureModel({
         required this.location,
         required this.current,
         required this.forecast,
+        required this.alerts,
     });
-
+    //standard constructor and factory method
     factory futureModel.fromJson(Map<String, dynamic> json) => futureModel(
         location: Location_json.fromJson(json["location"]),
         current: Current.fromJson(json["current"]),
         forecast: Forecast.fromJson(json["forecast"]),
+        alerts: Alerts.fromJson(json["alerts"]),
     );
 
     Map<String, dynamic> toJson() => {
         "location": location.toJson(),
         "current": current.toJson(),
         "forecast": forecast.toJson(),
+        "alerts": alerts.toJson(),
+    };
+}
+class Alerts {
+    List<dynamic> alert;
+
+    Alerts({
+        required this.alert,
+    });
+
+    factory Alerts.fromJson(Map<String, dynamic> json) => Alerts(
+        alert: List<dynamic>.from(json["alert"].map((x) => x)),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "alert": List<dynamic>.from(alert.map((x) => x)),
     };
 }
 
-
+//The following class contains the current weather data at the location, all as attributes of the class
 class Current {
     int lastUpdatedEpoch;
     String lastUpdated;
@@ -137,6 +158,7 @@ class Current {
     };
 }
 
+// this is a class the contains the weather condition at the requested location, it is contained within the current class
 class Condition {
     String text;
     String icon;
@@ -166,7 +188,9 @@ class Condition {
     }
 }
 
+// this class houses the forecast data which will contain predicted weather information for the time specified in the api request
 class Forecast {
+  //an attribute containing multiple days which have thier own forecasts
     List<Forecastday> forecastday;
 
     Forecast({
@@ -182,11 +206,13 @@ class Forecast {
     };
 }
 
+// a class containing the entire weather forecast for a particular day
 class Forecastday {
     DateTime date;
     int dateEpoch;
     Day day;
     Astro astro;
+    //the hours list contains hour by hour information of the days weather, notionally this should have 24 values in it 
     List<Hour> hour;
 
     Forecastday({
@@ -214,6 +240,7 @@ class Forecastday {
     };
 }
 
+//class containing astronomical information
 class Astro {
     String sunrise;
     String sunset;
@@ -257,7 +284,7 @@ class Astro {
         "is_sun_up": isSunUp,
     };
 }
-
+//a class containing overall condition averages for an entire day
 class Day {
     double maxtempC;
     double maxtempF;
@@ -349,7 +376,7 @@ class Day {
         "uv": uv,
     };
 }
-
+// a class containing hour by hour information for the forecast
 class Hour {
     int timeEpoch;
     String time;
@@ -494,6 +521,7 @@ class Hour {
     };
 }
 
+// the definition of the class containing location information about the requested area, such as the coordinates of the area
 class Location_json {
     String name;
     String region;
