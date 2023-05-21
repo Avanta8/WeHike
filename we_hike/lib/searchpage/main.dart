@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:we_hike/homelayout/layout.dart';
 import 'package:we_hike/my_api/api_calls.dart';
 import 'package:we_hike/my_api/future_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class BackButton extends StatelessWidget {
   const BackButton({super.key});
