@@ -13,6 +13,7 @@ class HourlyScroller extends StatelessWidget{
   Widget build(BuildContext context) {
     var now = DateTime.now();
     int time;
+    //makes the cards go only from the current hour onwards
     if (now.day >= weatherModel.date.day)
     {
       time = now.hour;
@@ -34,6 +35,7 @@ class HourlyScroller extends StatelessWidget{
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.grey.withOpacity(0.5),
+                        //making the cards rounded on the corners
                         borderRadius: const BorderRadius.only(
                           topLeft:Radius.circular(20),
                           topRight:Radius.circular(20),
@@ -46,6 +48,7 @@ class HourlyScroller extends StatelessWidget{
                       child:
                       Column(
                         children: [
+                          //centering and separating the data on the cards
                           const SizedBox(height: 15,),
                           WhiteText(text: DateFormat('HH:mm').format(DateTime(now.year,now.month,now.day,i)),),
                           const SizedBox(height: 10,),
