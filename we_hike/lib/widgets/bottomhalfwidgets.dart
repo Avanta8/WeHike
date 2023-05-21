@@ -16,7 +16,7 @@ class bottomHalf extends StatefulWidget{
   List<double> cloudcoverage = [];
   List<double> rainfall = [];
   List<double> feelslike = [];
-  List<String> alertlist = [];
+  List<String> warnings = [];
 
   void loop(){
   for (int i = 0; i < 24; i++) {
@@ -26,6 +26,12 @@ class bottomHalf extends StatefulWidget{
     rainfall.add(current.precipMm);
     feelslike.add(current.feelslikeC);
   }
+
+  if (alerts.alert.isNotEmpty) {
+    for (int i = 0; i < alerts.alert.length; i++){
+      warnings.add(alerts.alert[i].toString());
+    }
+  } else {warnings.add("No Warnings");}
   }
 
   bottomHalf({required this.textstyle, required this.weatherModel, required this.hournow, required this.alerts,});
@@ -46,7 +52,7 @@ class _bottomHalf extends State<bottomHalf>{
           ExpandableDropDown(name: 'Rainfall (mm)', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Cloud Coverage (%)', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Wind Speed (km/h)', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
-          //WeatherWarnings(name: 'Weather Warnings', data: widget.warnings, textstyle: widget.textstyle),
+          WeatherWarnings(name: 'Weather Warnings', data: widget.warnings, textstyle: widget.textstyle),
         ],
     );
   }
