@@ -96,7 +96,7 @@ Future<String> requestPermission() async {
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
-  }\
+  }
   return "OPK";
 }
 
