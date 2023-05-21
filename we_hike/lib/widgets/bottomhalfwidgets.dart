@@ -19,6 +19,7 @@ class bottomHalf extends StatefulWidget{
   List<String> warnings = [];
 
   void loop(){
+  // Iterates through each day on the model and extract the information
   for (int i = 0; i < 24; i++) {
   var current = weatherModel.hour[i];
     windspeed.add(current.windMph);
@@ -50,9 +51,9 @@ class _bottomHalf extends State<bottomHalf>{
         children: [
           ExpandableDropDown(name: 'Feels Like (°c)' , data: widget.feelslike, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Rainfall (mm)', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
+          WeatherWarnings(name: 'Weather Warnings', data: widget.warnings, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Cloud Coverage (%)', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Wind Speed (km/h)', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
-          WeatherWarnings(name: 'Weather Warnings', data: widget.warnings, textstyle: widget.textstyle),
         ],
     );
   }

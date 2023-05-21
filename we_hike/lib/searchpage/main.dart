@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:we_hike/homelayout/layout.dart';
 import 'package:we_hike/my_api/api_calls.dart';
 import 'package:we_hike/my_api/future_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class BackButton extends StatelessWidget {
   const BackButton({super.key});
@@ -33,41 +32,44 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage('assets/hills.jpg'),
-            fit: BoxFit.fitHeight,
-          )),
-          child: Row(
-            children: [
-              const Expanded(
-                flex: 1,
-                child: Align(
-                  alignment: FractionalOffset(0.4, 0.025),
-                  child: BackButton(),
-                ),
+      body: Container(
+        color: Colors.transparent,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage('assets/hills.jpg'),
+              fit: BoxFit.fitHeight,
+            )),
+            child: SafeArea(
+              child: Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: Align(
+                      alignment: FractionalOffset(0.4, 0.025),
+                      child: BackButton(),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1, // 20%
+                    child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
+                  ),
+                  const Expanded(
+                    flex: 6, // 60%
+                    child: MainFrame(),
+                  ),
+                  Expanded(
+                    flex: 2, // 20%
+                    child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
+                  ),
+                ],
               ),
-              Expanded(
-                flex: 1, // 20%
-                child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
-              ),
-              const Expanded(
-                flex: 6, // 60%
-                child: MainFrame(),
-              ),
-              Expanded(
-                flex: 2, // 20%
-                child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

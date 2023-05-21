@@ -51,10 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
   // based on if we are looking at today or tomorrow's weather
   Widget _getBottomHalf({required futureModel weatherModel}) {
     if(today == true) {
-      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[0], hournow: DateTime.now().hour, textstyle: const TextStyle(fontSize: 20, color: Colors.white), alerts: currentWeatherModel.alerts,);
+      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[0], hournow: DateTime.now().hour, textstyle: const TextStyle(fontFamily: 'Comfortaa',fontSize: 20, color: Colors.white), alerts: currentWeatherModel.alerts,);
     }
     else {
-      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[1], textstyle: const TextStyle(fontSize: 20, color: Colors.white), hournow: 0, alerts: currentWeatherModel.alerts,);
+      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[1], textstyle: const TextStyle(fontFamily: 'Comfortaa',fontSize: 20, color: Colors.white), hournow: 0, alerts: currentWeatherModel.alerts,);
     }
   }
 
@@ -278,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: 100,
-                              child: SunriseSunsetRectangle(sunrisetime: _getSunriseTime(weatherModel: currentWeatherModel), sunsettime: _getSunsetTime(weatherModel: currentWeatherModel), textstyle: const TextStyle(fontSize: 20, color: Colors.white))
+                              child: SunriseSunsetRectangle(sunrisetime: _getSunriseTime(weatherModel: currentWeatherModel), sunsettime: _getSunsetTime(weatherModel: currentWeatherModel), textstyle: const TextStyle(fontFamily: 'Comfortaa',fontSize: 20, color: Colors.white))
                           )
                       ),
 
