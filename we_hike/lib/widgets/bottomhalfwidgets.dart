@@ -10,11 +10,13 @@ class bottomHalf extends StatefulWidget{
   final Forecastday weatherModel;
   final int hournow;
   final TextStyle textstyle;
+  final Alerts alerts;
 
   List<double> windspeed = [];
   List<double> cloudcoverage = [];
   List<double> rainfall = [];
   List<double> feelslike = [];
+  List<String> alertlist = [];
 
   void loop(){
   for (int i = 0; i < 24; i++) {
@@ -26,7 +28,7 @@ class bottomHalf extends StatefulWidget{
   }
   }
 
-  bottomHalf({required this.textstyle, required this.weatherModel, required this.hournow,});
+  bottomHalf({required this.textstyle, required this.weatherModel, required this.hournow, required this.alerts,});
 
   @override
   _bottomHalf createState() => _bottomHalf();
