@@ -105,7 +105,7 @@ class SearchFrame extends StatelessWidget {
       children: const [
         NamedSearchWidget(),
         Padding(padding: EdgeInsets.all(10)),
-        CoordinateSearchWidget(),
+        // CoordinateSearchWidget(),
       ],
     );
   }
@@ -119,6 +119,11 @@ class NamedSearchWidget extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey.withOpacity(0.5),
+          minimumSize: const Size(0, 60),
+          textStyle: const TextStyle(fontSize: 20),
+        ),
         onPressed: () async {
           final navigator = Navigator.of(context);
           final selectedLocation = await showSearch(
@@ -153,6 +158,9 @@ class CoordinateSearchWidget extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey.withOpacity(0.5),
+        ),
         onPressed: () {},
         icon: const Icon(Icons.explore),
         label: const Text("Search Coordinates"),
@@ -169,6 +177,11 @@ class UseLocationButton extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey.withOpacity(0.5),
+          minimumSize: const Size(0, 60),
+          textStyle: const TextStyle(fontSize: 20),
+        ),
         onPressed: () {
           final futuremodel = getForecastFromCurrentLocation();
           Navigator.push(
