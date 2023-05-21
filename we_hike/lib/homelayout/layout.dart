@@ -83,18 +83,18 @@ class _LayoutState extends State<Layout> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: SizedBox(
-                          height: 35,
-                          width: 35,
-                          child: widget.svg,
-                        ),
+                    height: 35,
+                    width: 35,
+                    child: widget.svg,
+                  ),
                 ),
                 // move to search screen
               ),
               onTap: () {
-                          Navigator.push(
-                            context, 
-                            MaterialPageRoute(builder: (context) => const SearchPage()));
-                        },
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => const SearchPage()));
+              },
             ),
           )
         );

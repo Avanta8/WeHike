@@ -158,8 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             // this widget allows the screen to scroll vertically
-            child: SingleChildScrollView(
-                  child: Column(
+                  child: ListView(
                     children: [
                       Row(
                           children: [
@@ -271,7 +270,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                   )
                 ),
-          ),
           );
   }
 }
