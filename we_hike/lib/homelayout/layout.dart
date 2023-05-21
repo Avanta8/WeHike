@@ -78,13 +78,13 @@ class _LayoutState extends State<Layout> {
             ),
           child: GestureDetector(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
               // the GestureDetector allows the magnifying glass to direct us to the search page when pressed
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: SizedBox(
-                    height: 35,
-                    width: 35,
+                    height: 50,
+                    width: 50,
                     child: widget.svg,
                   ),
                 ),

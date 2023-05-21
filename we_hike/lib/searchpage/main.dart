@@ -4,51 +4,68 @@ import 'package:we_hike/my_api/api_calls.dart';
 import 'package:we_hike/my_api/future_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class BackButton extends StatelessWidget {
+  const BackButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: const Icon(
+        Icons.arrow_circle_left,
+        color: Colors.white,
+        size: 50,
+      ),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Layout(
+                      key: key,
+                    )));
+      },
+    );
+  }
+}
+
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // width: MediaQuery.of(context).size.width,
-      // height: MediaQuery.of(context).size.height,
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage('assets/hills.jpg'),
-        fit: BoxFit.fitHeight,
-      )),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: GestureDetector(
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.green,
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/hills.jpg'),
+            fit: BoxFit.fitHeight,
+          )),
+          child: Row(
+            children: [
+              const Expanded(
+                flex: 1,
+                child: Align(
+                  alignment: FractionalOffset(0.4, 0.025),
+                  child: BackButton(),
+                ),
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Layout(
-                              key: key,
-                            )));
-              },
-            ),
+              Expanded(
+                flex: 1, // 20%
+                child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
+              ),
+              const Expanded(
+                flex: 6, // 60%
+                child: MainFrame(),
+              ),
+              Expanded(
+                flex: 2, // 20%
+                child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
+              ),
+            ],
           ),
-          Expanded(
-            flex: 1, // 20%
-            child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
-          ),
-          const Expanded(
-            flex: 6, // 60%
-            child: MainFrame(),
-          ),
-          Expanded(
-            flex: 2, // 20%
-            child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -65,7 +82,7 @@ class MainFrame extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           // Text('A random idea:'),
-          Padding(padding: EdgeInsets.all(40.0)),
+          Padding(padding: EdgeInsets.all(120.0)),
           // Placeholder(),
           // Expanded(child: SearchFrame()),
           SearchFrame(),
@@ -92,7 +109,7 @@ class SearchFrame extends StatelessWidget {
       children: const [
         NamedSearchWidget(),
         Padding(padding: EdgeInsets.all(10)),
-        CoordinateSearchWidget(),
+        // CoordinateSearchWidget(),
       ],
     );
   }
@@ -106,6 +123,11 @@ class NamedSearchWidget extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey.withOpacity(0.8),
+          minimumSize: const Size(0, 60),
+          textStyle: const TextStyle(fontSize: 20),
+        ),
         onPressed: () async {
           final navigator = Navigator.of(context);
           final selectedLocation = await showSearch(
@@ -140,6 +162,9 @@ class CoordinateSearchWidget extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey.withOpacity(0.8),
+        ),
         onPressed: () {},
         icon: const Icon(Icons.explore),
         label: const Text("Search Coordinates"),
@@ -156,6 +181,11 @@ class UseLocationButton extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey.withOpacity(0.8),
+          minimumSize: const Size(0, 60),
+          textStyle: const TextStyle(fontSize: 20),
+        ),
         onPressed: () {
           final futuremodel = getForecastFromCurrentLocation();
           Navigator.push(
@@ -202,8 +232,9 @@ class NamedSearchDelelgate extends SearchDelegate {
     List suggestions = [
       if (query.isNotEmpty) query,
       "London",
-      "China",
-      "Brazil",
+      "Cambridge",
+      "Bristol",
+      "Swansea",
     ];
 
     return ListView.builder(

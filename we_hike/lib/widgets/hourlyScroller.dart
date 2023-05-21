@@ -51,7 +51,7 @@ class HourlyScroller extends StatelessWidget{
                           const SizedBox(height: 10,),
                           Center(child: CurrentWeatherIcon(iconCode: hourlyList[i].condition.code,)),
                           const SizedBox(height: 20,),
-                          WhiteText(text: hourlyList[i].tempC.toString()+"°", size: 25),
+                          WhiteText(text: hourlyList[i].tempC.round().toString()+"°", size: 25),
                         ],
                       ),
                     ),

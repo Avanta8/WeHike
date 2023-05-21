@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:we_hike/widgets/hourlyScroller.dart';
 import 'package:we_hike/widgets/current_weather_icon.dart';
 
+
 // This class contains the home screen of the app
 class HomeScreen extends StatefulWidget {
   final futureModel currentWeatherModel;
@@ -17,7 +18,6 @@ class HomeScreen extends StatefulWidget {
     super.key,
     required this.currentWeatherModel,
   });
-
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -51,31 +51,59 @@ class _HomeScreenState extends State<HomeScreen> {
   // based on if we are looking at today or tomorrow's weather
   Widget _getBottomHalf({required futureModel weatherModel}) {
     if(today == true) {
-      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[0], hournow: DateTime.now().hour, textstyle: const TextStyle(fontSize: 20, color: Colors.white),);
+      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[0], hournow: DateTime.now().hour, textstyle: const TextStyle(fontSize: 20, color: Colors.white), alerts: currentWeatherModel.alerts,);
     }
     else {
-      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[1], textstyle: const TextStyle(fontSize: 20, color: Colors.white), hournow: 0,);
+      return bottomHalf(weatherModel: weatherModel.forecast.forecastday[1], textstyle: const TextStyle(fontSize: 20, color: Colors.white), hournow: 0, alerts: currentWeatherModel.alerts,);
     }
   }
+
+  String to24Hour(String time) {
+    // Split the time string into components
+    List<String> components = time.split(':');
+    int hours = int.parse(components[0]);
+    int minutes = int.parse(components[1].substring(0, 2));
+    String period = components[1].substring(2).trim();
+
+    // Adjust hours based on the period (AM or PM)
+    if (period.toLowerCase() == 'pm' && hours < 12) {
+      hours += 12;
+    } else if (period.toLowerCase() == 'am' && hours == 12) {
+      hours = 0;
+    }
+
+    // Format the time in 24-hour format
+    String formattedTime = '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+    return formattedTime;
+  }
+
 
   // returns the sunrise time for today or tomorrow as appropriate
   String _getSunriseTime({required futureModel weatherModel}) {
     if(today == true) {
-      return weatherModel.forecast.forecastday[0].astro.sunrise;
+      String time = to24Hour(weatherModel.forecast.forecastday[0].astro.sunrise);
+      return time;
     }
     else {
+      String time = to24Hour(weatherModel.forecast.forecastday[1].astro.sunrise);
       return weatherModel.forecast.forecastday[1].astro.sunrise;
     }
   }
 
   // returns the sunset time for today or tomorrow as appropriate
-  String _getSunssetTime({required futureModel weatherModel}) {
+  String _getSunsetTime({required futureModel weatherModel}) {
     if(today == true) {
-      return weatherModel.forecast.forecastday[0].astro.sunset;
+      String time = to24Hour(weatherModel.forecast.forecastday[0].astro.sunset);
+      return time;
     }
     else {
-      return weatherModel.forecast.forecastday[1].astro.sunset;
+      String time = to24Hour(weatherModel.forecast.forecastday[1].astro.sunset);
+      return time;
     }
+  }
+
+  String _getCurrentTemp() {
+    return currentWeatherModel.forecast.forecastday[0].hour[DateTime.now().hour].tempC.round().toString();
   }
 
   // bar at the bottom of the screen that displays the current date and 
@@ -218,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: WhiteText(
-                                          text: "${currentWeatherModel.current.tempC.toString()}°",
+                                          text: "${_getCurrentTemp()}°",
                                           size: 30
                                         ),
                                       ),
@@ -250,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: 100,
-                              child: SunriseSunsetRectangle(sunrisetime: _getSunriseTime(weatherModel: currentWeatherModel), sunsettime: _getSunssetTime(weatherModel: currentWeatherModel), textstyle: const TextStyle(fontSize: 20, color: Colors.white))
+                              child: SunriseSunsetRectangle(sunrisetime: _getSunriseTime(weatherModel: currentWeatherModel), sunsettime: _getSunsetTime(weatherModel: currentWeatherModel), textstyle: const TextStyle(fontSize: 20, color: Colors.white))
                           )
                       ),
 
