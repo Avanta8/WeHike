@@ -70,7 +70,7 @@ class _LayoutState extends State<Layout> {
               decoration: const BoxDecoration(
                   image: DecorationImage(
                 image: AssetImage('assets/hills.jpg'),
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               )),
               child: SafeArea(
                 child: GestureDetector(
