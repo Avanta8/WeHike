@@ -66,7 +66,38 @@ class _LayoutState extends State<Layout> {
       // if the weather model is null, the background image of the weather app
       // is shown until the weather model is returned
       else{
-        return const SearchPage();
+        return Scaffold(
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/hills.jpg'),
+                fit: BoxFit.fitHeight,
+                )
+            ),
+          child: GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              // the GestureDetector allows the magnifying glass to direct us to the search page when pressed
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: SizedBox(
+                    height: 35,
+                    width: 35,
+                    child: widget.svg,
+                  ),
+                ),
+                // move to search screen
+              ),
+              onTap: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => const SearchPage()));
+              },
+            ),
+          )
+        );
       }
       }
     );
