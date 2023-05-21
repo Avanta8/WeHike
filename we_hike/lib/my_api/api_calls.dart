@@ -88,7 +88,7 @@ Future<Position> _determinePosition() async {
 
 
 
-void requestPermission() async {
+Future<String> requestPermission() async {
   bool serviceEnabled;
   LocationPermission permission;
   // Test if location services are enabled.
@@ -96,7 +96,8 @@ void requestPermission() async {
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
-  }
+  }\
+  return "OPK";
 }
 
 Future<Position> getLocation() async {
