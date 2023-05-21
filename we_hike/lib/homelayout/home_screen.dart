@@ -152,7 +152,8 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/hills.jpg'),
-                fit: BoxFit.fitHeight,
+                //fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
                 )
             ),
 
