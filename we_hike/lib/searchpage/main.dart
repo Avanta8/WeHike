@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:we_hike/homelayout/layout.dart';
-import 'package:we_hike/my_api/api_calls.dart';
-import 'package:we_hike/my_api/future_model.dart';
+import 'package:we_hike/searchpage/search_button.dart';
+import 'package:we_hike/searchpage/location_button.dart';
 
 class BackButton extends StatelessWidget {
   const BackButton({super.key});
@@ -34,42 +34,42 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.transparent,
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('assets/hills.jpg'),
-              fit: BoxFit.fitHeight,
-            )),
-            child: SafeArea(
-              child: Row(
-                children: [
-                  const Expanded(
-                    flex: 1,
-                    child: Align(
-                      alignment: FractionalOffset(0.4, 0.025),
-                      child: BackButton(),
-                    ),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/hills.jpg'),
+            fit: BoxFit.fitHeight,
+          )),
+          child: SafeArea(
+            child: Row(
+              children: [
+                const Expanded(
+                  flex: 1,
+                  child: Align(
+                    alignment: FractionalOffset(0.4, 0.025),
+                    child: BackButton(),
                   ),
-                  Expanded(
-                    flex: 1, // 20%
-                    child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
-                  ),
-                  const Expanded(
-                    flex: 6, // 60%
-                    child: MainFrame(),
-                  ),
-                  Expanded(
-                    flex: 2, // 20%
-                    child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
-                  ),
-                ],
-              ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
+                ),
+                const Expanded(
+                  flex: 6,
+                  child: MainFrame(),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(color: const Color.fromARGB(0, 0, 0, 0)),
+                ),
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
 
@@ -81,207 +81,13 @@ class MainFrame extends StatelessWidget {
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          // Text('A random idea:'),
           Padding(padding: EdgeInsets.all(120.0)),
-          // Placeholder(),
-          // Expanded(child: SearchFrame()),
-          SearchFrame(),
-          // Text("more text"),
+          SearchButton(),
           Padding(padding: EdgeInsets.all(50.0)),
-          UseLocationButton(),
+          LocationButton(),
         ],
       ),
     );
-  }
-}
-
-class SearchFrame extends StatelessWidget {
-  const SearchFrame({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // return Placeholder();
-    return Column(
-      // padding: EdgeInsets.all(8.0),
-
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-
-      children: const [
-        NamedSearchWidget(),
-        Padding(padding: EdgeInsets.all(10)),
-        // CoordinateSearchWidget(),
-      ],
-    );
-  }
-}
-
-class NamedSearchWidget extends StatelessWidget {
-  const NamedSearchWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.withOpacity(0.8),
-          minimumSize: const Size(0, 60),
-          textStyle: const TextStyle(fontSize: 20),
-        ),
-        onPressed: () async {
-          final navigator = Navigator.of(context);
-          final selectedLocation = await showSearch(
-            context: context,
-            delegate: NamedSearchDelelgate(),
-          );
-          if (selectedLocation is String) {
-            final futuremodel = getWeatherForecast(selectedLocation);
-            navigator.push(
-              MaterialPageRoute(
-                builder: (context) => Layout(
-                  key: key,
-                  weatherForecast: futuremodel,
-                ),
-              ),
-            );
-            // }
-          }
-        },
-        icon: const Icon(Icons.search),
-        label: const Text("Search"),
-      ),
-    );
-  }
-}
-
-class CoordinateSearchWidget extends StatelessWidget {
-  const CoordinateSearchWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.withOpacity(0.8),
-        ),
-        onPressed: () {},
-        icon: const Icon(Icons.explore),
-        label: const Text("Search Coordinates"),
-      ),
-    );
-  }
-}
-
-class UseLocationButton extends StatelessWidget {
-  const UseLocationButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.withOpacity(0.8),
-          minimumSize: const Size(0, 60),
-          textStyle: const TextStyle(fontSize: 20),
-        ),
-        onPressed: () {
-          final futuremodel = getForecastFromCurrentLocation();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Layout(
-                key: key,
-                weatherForecast: futuremodel,
-              ),
-            ),
-          );
-        },
-        icon: const Icon(Icons.my_location),
-        label: const Text("Use my location"),
-      ),
-    );
-  }
-}
-
-class NamedSearchDelelgate extends SearchDelegate {
-  @override
-  List<Widget>? buildActions(BuildContext context) => [
-        IconButton(
-          onPressed: () {
-            if (query.isEmpty) {
-              close(context, null);
-            } else {
-              query = "";
-            }
-          },
-          icon: const Icon(Icons.clear),
-        ),
-      ];
-
-  @override
-  Widget? buildLeading(BuildContext context) => IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () => close(context, null),
-      );
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // Center(child: Text(query));
-    List suggestions = [
-      if (query.isNotEmpty) query,
-      "London",
-      "Cambridge",
-      "Bristol",
-      "Swansea",
-    ];
-
-    return ListView.builder(
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        final suggestion = suggestions[index];
-
-        return ListTile(
-          title: Text(suggestion),
-          onTap: () {
-            query = suggestion;
-
-            close(context, query);
-          },
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // close(context, query);
-    // return const Placeholder();
-    return buildResults(context);
-
-    //   List suggestions = [
-    //     "London",
-    //     "China",
-    //     "Brazil",
-    //   ];
-
-    //   return ListView.builder(
-    //     itemCount: suggestions.length,
-    //     itemBuilder: (context, index) {
-    //       final suggestion = suggestions[index];
-
-    //       return ListTile(
-    //         title: Text(suggestion),
-    //         onTap: () {
-    //           query = suggestion;
-
-    //           showResults(context);
-    //         },
-    //       );
-    //     },
-    //   );
   }
 }
