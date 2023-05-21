@@ -102,6 +102,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  String _getCurrentTemp() {
+    return currentWeatherModel.forecast.forecastday[0].hour[DateTime.now().hour].tempC.round().toString();
+  }
+
   // bar at the bottom of the screen that displays the current date and 
   // allows the user to switch between data about the weather today and tomorrow
   Widget _bottomBar() {
@@ -242,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: WhiteText(
-                                          text: "${currentWeatherModel.current.tempC.toString()}°",
+                                          text: "${_getCurrentTemp()}°",
                                           size: 30
                                         ),
                                       ),
