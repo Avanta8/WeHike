@@ -33,8 +33,8 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: MediaQuery.of(context).size.width,
-      // height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
           image: DecorationImage(
         image: AssetImage('assets/hills.jpg'),
@@ -159,7 +159,7 @@ class CoordinateSearchWidget extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.withOpacity(0.5),
+          backgroundColor: Colors.grey.withOpacity(0.8),
         ),
         onPressed: () {},
         icon: const Icon(Icons.explore),
@@ -178,7 +178,7 @@ class UseLocationButton extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey.withOpacity(0.5),
+          backgroundColor: Colors.grey.withOpacity(0.8),
           minimumSize: const Size(0, 60),
           textStyle: const TextStyle(fontSize: 20),
         ),
@@ -228,8 +228,9 @@ class NamedSearchDelelgate extends SearchDelegate {
     List suggestions = [
       if (query.isNotEmpty) query,
       "London",
-      "China",
-      "Brazil",
+      "Cambridge",
+      "Bristol",
+      "Swansea",
     ];
 
     return ListView.builder(
