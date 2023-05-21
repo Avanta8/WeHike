@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:we_hike/my_api/api_calls.dart';
 import 'package:we_hike/my_api/future_model.dart';
 import 'package:we_hike/homelayout/home_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:we_hike/searchpage/main.dart';
 
 
 // this class starts the app by calling the Layout() method
@@ -9,7 +11,7 @@ class WeatherApp extends StatelessWidget {
   const WeatherApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Layout(),
     );
   }
@@ -18,7 +20,7 @@ class WeatherApp extends StatelessWidget {
 // the Layout stateful widget contains the weather forecast model as part of its state
 class Layout extends StatefulWidget {
   final Future<futureModel?>? weatherForecast;
-  const Layout({
+  Layout({
     super.key,
     this.weatherForecast,
   });
@@ -36,6 +38,13 @@ class Layout extends StatefulWidget {
       return getWeatherForecast("Edinburgh");
     }
   }
+
+  final Widget svg = SvgPicture.asset(
+  'assets/magnifying-glass-solid.svg',
+  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  semanticsLabel: 'Magnifying glass',
+  alignment: Alignment.centerLeft,
+  );
 }
 
 class _LayoutState extends State<Layout> {
@@ -67,7 +76,25 @@ class _LayoutState extends State<Layout> {
                 fit: BoxFit.fitHeight,
                 )
             ),
-          ),
+          child: GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              // the GestureDetector allows the magnifying glass to direct us to the search page when pressed
+              child: GestureDetector(
+                child: SizedBox(
+                        height: 35,
+                        child: widget.svg,
+                      ),
+                // move to search screen
+                onTap: () {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => const SearchPage()));
+                        },
+              ),
+            ),
+          )
+          )
         );
       }
       }
