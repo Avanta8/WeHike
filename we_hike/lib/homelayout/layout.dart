@@ -13,6 +13,7 @@ class WeatherApp extends StatelessWidget {
     requestPermission();
     return MaterialApp(
       home: Layout(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
