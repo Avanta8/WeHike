@@ -39,6 +39,7 @@ class _SunriseSunsetRectangle extends State<SunriseSunsetRectangle>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
+                // Creates rows and columns to show the sunrise and sunset times
                 padding: const EdgeInsets.all(14.0),
                 child: Row(
                     children: [

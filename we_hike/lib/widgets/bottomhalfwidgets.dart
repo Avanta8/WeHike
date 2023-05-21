@@ -28,6 +28,7 @@ class bottomHalf extends StatefulWidget{
     feelslike.add(current.feelslikeC);
   }
 
+  // Iterate through alerts and convert to strings
   if (alerts.alert.isNotEmpty) {
     for (int i = 0; i < alerts.alert.length; i++){
       warnings.add(alerts.alert[i].toString());
@@ -45,9 +46,11 @@ class _bottomHalf extends State<bottomHalf>{
 
   @override
   Widget build(BuildContext context) {
+  // calls the loop to initialise the inputs for each widget
   widget.loop();
     return ListView(
         padding: EdgeInsets.zero,
+        // Makes a listview of each widget, and passes correct data into the widgets
         children: [
           ExpandableDropDown(name: 'Feels Like (°c)' , data: widget.feelslike, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Rainfall (mm)', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
