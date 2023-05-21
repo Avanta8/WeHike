@@ -3,7 +3,7 @@ import 'package:we_hike/my_api/api_calls.dart';
 import 'package:we_hike/my_api/future_model.dart';
 import 'package:we_hike/homelayout/home_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:we_hike/searchpage/main.dart';
+import 'package:we_hike/searchpage/search_page.dart';
 
 // this class starts the app by calling the Layout() method
 class WeatherApp extends StatelessWidget {
