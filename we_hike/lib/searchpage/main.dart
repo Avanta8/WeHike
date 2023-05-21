@@ -40,7 +40,7 @@ class SearchPage extends StatelessWidget {
           decoration: const BoxDecoration(
               image: DecorationImage(
             image: AssetImage('assets/hills.jpg'),
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.cover,
           )),
           child: SafeArea(
             child: Row(
