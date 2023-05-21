@@ -10,11 +10,13 @@ class bottomHalf extends StatefulWidget{
   final Forecastday weatherModel;
   final int hournow;
   final TextStyle textstyle;
+  final Alerts alerts;
 
   List<double> windspeed = [];
   List<double> cloudcoverage = [];
   List<double> rainfall = [];
   List<double> feelslike = [];
+  List<String> alertlist = [];
 
   void loop(){
   for (int i = 0; i < 24; i++) {
@@ -26,7 +28,7 @@ class bottomHalf extends StatefulWidget{
   }
   }
 
-  bottomHalf({required this.textstyle, required this.weatherModel, required this.hournow,});
+  bottomHalf({required this.textstyle, required this.weatherModel, required this.hournow, required this.alerts,});
 
   @override
   _bottomHalf createState() => _bottomHalf();
@@ -41,9 +43,9 @@ class _bottomHalf extends State<bottomHalf>{
         padding: EdgeInsets.zero,
         children: [
           ExpandableDropDown(name: 'Feels Like (°c)' , data: widget.feelslike, hournow: widget.hournow, textstyle: widget.textstyle),
-          ExpandableDropDown(name: 'Wind Speed (kmp/h)', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
-          ExpandableDropDown(name: 'Cloud Coverage (%)', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Rainfall (mm)', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Cloud Coverage (%)', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
+          ExpandableDropDown(name: 'Wind Speed (km/h)', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
           //WeatherWarnings(name: 'Weather Warnings', data: widget.warnings, textstyle: widget.textstyle),
         ],
     );
