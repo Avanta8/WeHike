@@ -14,6 +14,7 @@ class bottomHalf extends StatefulWidget{
   List<double> windspeed = [];
   List<double> cloudcoverage = [];
   List<double> rainfall = [];
+  List<double> feelslike = [];
 
   void loop(){
   for (int i = 0; i < 24; i++) {
@@ -21,6 +22,7 @@ class bottomHalf extends StatefulWidget{
     windspeed.add(current.windMph);
     cloudcoverage.add(current.cloud.toDouble());
     rainfall.add(current.precipMm);
+    feelslike.add(current.feelslikeC);
   }
   }
 
@@ -38,6 +40,7 @@ class _bottomHalf extends State<bottomHalf>{
     return ListView(
         padding: EdgeInsets.zero,
         children: [
+          ExpandableDropDown(name: 'Feels Like' , data: widget.feelslike, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Wind Speed', data: widget.windspeed, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Cloud Coverage', data: widget.cloudcoverage, hournow: widget.hournow, textstyle: widget.textstyle),
           ExpandableDropDown(name: 'Rainfall', data: widget.rainfall, hournow: widget.hournow, textstyle: widget.textstyle),

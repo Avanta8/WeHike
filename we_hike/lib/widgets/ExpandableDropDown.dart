@@ -55,7 +55,7 @@ class _ExpandableDropDown extends State<ExpandableDropDown> {
                       ),
                     ),
                     Text(
-                        widget.data[0].toString(),
+                        widget.data[widget.hournow].toString(),
                         style: widget.textstyle
                     ),
                     IconButton(
@@ -80,7 +80,7 @@ class _ExpandableDropDown extends State<ExpandableDropDown> {
                         final time = TimeOfDay(hour: widget.hournow + index, minute: 0);
                         final formattedTime =
                             '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
-                        final value = widget.data[index];
+                        final value = widget.data[index+widget.hournow];
 
                         return Padding(
                           padding: const EdgeInsets.all(14.0),
