@@ -15,12 +15,7 @@ class BackButton extends StatelessWidget {
         size: 50,
       ),
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Layout(
-                      key: key,
-                    )));
+        Navigator.pop(context);
       },
     );
   }
