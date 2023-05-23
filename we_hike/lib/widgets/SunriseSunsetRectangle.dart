@@ -8,7 +8,7 @@ class SunriseSunsetRectangle extends StatefulWidget{
   final String sunsettime;
   final TextStyle textstyle;
 
-  SunriseSunsetRectangle({required this.sunrisetime, required this.sunsettime, required this.textstyle});
+  const SunriseSunsetRectangle({required this.sunrisetime, required this.sunsettime, required this.textstyle});
 
   @override
   _SunriseSunsetRectangle createState() => _SunriseSunsetRectangle();
@@ -28,7 +28,7 @@ class _SunriseSunsetRectangle extends State<SunriseSunsetRectangle>{
           height: 80,
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.5),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20.0),
               topRight: Radius.circular(20.0),
               bottomLeft: Radius.circular(20.0),
@@ -39,6 +39,7 @@ class _SunriseSunsetRectangle extends State<SunriseSunsetRectangle>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
+                // Creates rows and columns to show the sunrise and sunset times
                 padding: const EdgeInsets.all(14.0),
                 child: Row(
                     children: [

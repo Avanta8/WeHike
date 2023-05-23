@@ -8,113 +8,115 @@ class CurrentWeatherIcon extends StatelessWidget {
     required this.iconCode,
   });
 
+  // This method converts the api weaather icon code into a cupertino icon that flutter can display
   Widget _getWeatherIcon() {
     switch(iconCode) {
-      case 395:
+      case 1282:
         return const Icon(CupertinoIcons.cloud_bolt_rain_fill, color: Colors.white);
-      case 392:
+      case 1279:
         return const Icon(CupertinoIcons.cloud_bolt_rain, color: Colors.white);
-      case 389:
+      case 1276:
         return const Icon(CupertinoIcons.cloud_bolt_rain, color: Colors.white);
-      case 377:
+      case 1264:
       return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 374:
+      case 1261:
         return const Icon(CupertinoIcons.cloud_sleet, color: Colors.white);
-      case 371:
+      case 1258:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 368:
+      case 1255:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 365:
+      case 1252:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 362:
+      case 1249:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 359:
+      case 1246:
         return const Icon(CupertinoIcons.cloud_rain_fill, color: Colors.white);
-      case 356:
+      case 1243:
         return const Icon(CupertinoIcons.cloud_rain_fill, color: Colors.white);
-      case 353:
+      case 1240:
         return const Icon(CupertinoIcons.cloud_rain_fill, color: Colors.white);
-      case 350:
+      case 1237:
         return const Icon(CupertinoIcons.snow, color: Colors.white);
-      case 338:
+      case 1225:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 335:
+      case 1222:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 332:
+      case 1219:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 329:
+      case 1216:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 326:
+      case 1213:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 323:
+      case 1210:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 320:
+      case 1207:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 317:
+      case 1204:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 314:
+      case 1201:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 311:
+      case 1198:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 308:
+      case 1195:
         return const Icon(CupertinoIcons.cloud_heavyrain_fill, color: Colors.white);
-      case 305:
+      case 1192:
         return const Icon(CupertinoIcons.cloud_heavyrain_fill, color: Colors.white);
-      case 302:
+      case 1189:
         return const Icon(CupertinoIcons.cloud_heavyrain_fill, color: Colors.white);
-      case 299:
+      case 1186:
         return const Icon(CupertinoIcons.cloud_heavyrain_fill, color: Colors.white);
-      case 296:
+      case 1183:
         return const Icon(CupertinoIcons.cloud_rain_fill, color: Colors.white);
-      case 293:
+      case 1180:
         return const Icon(CupertinoIcons.cloud_rain_fill, color: Colors.white);
-      case 284:
+      case 1171:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 281:
+      case 1168:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 266:
+      case 1153:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 263:
+      case 1150:
         return const Icon(CupertinoIcons.cloud_rain_fill, color: Colors.white);
-      case 260:
+      case 1147:
         return const Icon(CupertinoIcons.cloud_fog_fill, color: Colors.white);
-      case 248:
+      case 1135:
         return const Icon(CupertinoIcons.cloud_fog_fill, color: Colors.white);
-      case 230:
+      case 1117:
         return const Icon(CupertinoIcons.wind_snow, color: Colors.white);
-      case 227:
+      case 1114:
         return const Icon(CupertinoIcons.wind_snow, color: Colors.white);
-      case 200:
+      case 1087:
         return const Icon(CupertinoIcons.cloud_bolt_fill, color: Colors.white);
-      case 185:
+      case 1072:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 182:
+      case 1069:
         return const Icon(CupertinoIcons.cloud_sleet_fill, color: Colors.white);
-      case 179:
+      case 1066:
         return const Icon(CupertinoIcons.cloud_snow_fill, color: Colors.white);
-      case 176:
+      case 1063:
         return const Icon(CupertinoIcons.cloud_rain_fill, color: Colors.white);
-      case 143:
+      case 1030:
         return const Icon(CupertinoIcons.cloud_fog_fill, color: Colors.white);
-      case 122:
+      case 1009:
         return const Icon(CupertinoIcons.cloud_fill, color: Colors.white);
-      case 119:
+      case 1006:
         return const Icon(CupertinoIcons.cloud_fill, color: Colors.white);
-      case 116:
+      case 1003:
         return const Icon(CupertinoIcons.cloud_sun, color: Colors.white);
-      case 113:
+      case 1000:
         return const Icon(CupertinoIcons.sun_max_fill, color: Colors.white);
     }
     return const Icon(Icons.cloud);
   }
 
+  // The build method returns the appropriate widget with some padding
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(0, 10, 20, 0),
-        child: Align(
-          alignment: Alignment.centerRight,
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
+        child: Center(
+
+          // The combination of SizedBox and FittedBox allows the widget to expand to a fixed size
           child: SizedBox(
             width: 50,
             height: 50,
@@ -124,7 +126,6 @@ class CurrentWeatherIcon extends StatelessWidget {
                 ),
               ),
             ),
-        ),
     );
   }
 }

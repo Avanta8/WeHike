@@ -15,8 +15,12 @@ dependencies:
   http: ^0.13.6
   geolocator: ^9.0.2
   location: ^4.3.0
-  shared_preferences: ^2.1.1
-  provider: ^6.0.0
+  #window_size:
+  #  git:
+  #    url: git://github.com/google/flutter-desktop-embedding.git
+  #    path: plugins/window_size
+  #    ref: 927f8cbc09b35d85245c095f2db8df9b186f6618
+
 
 
 dev_dependencies:

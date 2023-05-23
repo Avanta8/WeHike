@@ -71,6 +71,7 @@ class _ExpandableDropDown extends State<WeatherWarnings> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
+                      // Generates a text widget for each warning
                       children: List.generate(widget.data.length, (index) {
                         final warningtext = widget.data[index];
 
